@@ -1,0 +1,19 @@
+aid: osisoft-pi
+url: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/apis.yml
+apis:
+- aid: osisoft-pi:osisoft-pi-api
+  name: OSIsoft PI System (PI Web API)
+  tags:
+  - Manufacturing
+  - Energy
+  - Process Historian
+  - Time Series
+  - SCADA
+  image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
+  humanURL: https://docs.aveva.com/
+  baseURL: https://piwebapi.example.com/piwebapi
+  properties:
+  - url: https://docs.aveva.com/
+    type: Documentation
+  description: >-
+    OSIsoft PI System (now part of AVEVA) provides the PI Web API for accessing process historian data. REST APIs enable real-time and historical time-series data retrieval, event frame queries, asset hierarchy navigation, and calculated data for industrial process monitoring.
