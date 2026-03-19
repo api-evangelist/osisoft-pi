@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/osisoft-pi/json-schema/osisoft-pi-point-schema.json",
+  "title": "OSIsoft PI Point",
+  "description": "Schema for an OSIsoft PI point (tag), the fundamental data storage unit in the PI System representing a single time-series measurement.",
+  "type": "object",
+  "properties": {
+    "WebId": {
+      "type": "string",
+      "description": "PI Web API opaque unique identifier"
+    },
+    "Id": {
+      "type": "integer",
+      "description": "PI point numeric ID on the PI Data Archive"
+    },
+    "Name": {
+      "type": "string",
+      "maxLength": 80,
+      "description": "PI tag name"
+    },
+    "Path": {
+      "type": "string",
+      "description": "Full PI path (\\\\ServerName\\TagName)"
+    },
+    "PointType": {
+      "type": "string",
+      "enum": ["Float16", "Float32", "Float64", "Int16", "Int32", "Digital", "Timestamp", "String"],
+      "description": "PI point data type"
+    },
+    "EngineeringUnits": {
+      "type": "string",
+      "description": "Unit of measure (e.g., kPa, °C, m3/h)"
+    },
+    "Description": {
+      "type": "string",
+      "maxLength": 128,
+      "description": "Tag description"
+    },
+    "Descriptor": {
+      "type": "string",
+      "maxLength": 32,
+      "description": "Short descriptor"
+    },
+    "PointClass": {
+      "type": "string",
+      "description": "PI point class (classic, base, etc.)"
+    },
+    "Zero": {
+      "type": "number",
+      "description": "Zero value for analog points"
+    },
+    "Span": {
+      "type": "number",
+      "description": "Span value for analog points"
+    },
+    "ExcMin": {
+      "type": "number",
+      "description": "Exception minimum for compression"
+    },
+    "ExcMax": {
+      "type": "number",
+      "description": "Exception maximum for compression"
+    },
+    "Step": {
+      "type": "boolean",
+      "description": "True if values are step-function (digital/integer types)"
+    },
+    "Future": {
+      "type": "boolean",
+      "description": "True if future-dated values are allowed"
+    },
+    "Tag": {
+      "type": "string",
+      "description": "Tag name alias"
+    },
+    "Instrument": {
+      "type": "string",
+      "description": "Instrument tag reference"
+    },
+    "Location1": { "type": "integer", "description": "Location attribute 1" },
+    "Location2": { "type": "integer", "description": "Location attribute 2" },
+    "Location3": { "type": "integer", "description": "Location attribute 3" },
+    "Location4": { "type": "integer", "description": "Location attribute 4" },
+    "Location5": { "type": "integer", "description": "Location attribute 5" }
+  },
+  "required": ["WebId", "Name", "PointType"],
+  "examples": [
+    {
+      "WebId": "P0UKSmL5GxNku5bXVjXV1zIgAAAUEkT0NPRFwtUEkxXFJFQUNUT1IuVEVNUC5QVjE",
+      "Id": 1042,
+      "Name": "REACTOR.TEMP.PV1",
+      "Path": "\\\\PI-SERVER1\\REACTOR.TEMP.PV1",
+      "PointType": "Float32",
+      "EngineeringUnits": "°C",
+      "Description": "Reactor 1 Temperature Process Variable",
+      "Descriptor": "R1 Temp",
+      "PointClass": "classic",
+      "Zero": -50,
+      "Span": 250,
+      "Step": false,
+      "Future": false
+    }
+  ]
+}

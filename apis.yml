@@ -24,6 +24,8 @@ apis:
     type: SDKs
   - url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
     type: SDKs
+  - url: openapi/osisoft-pi-web-api-openapi.yml
+    type: OpenAPI
   description: >-
     OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
 
@@ -81,6 +83,14 @@ common:
   type: GitHubOrganization
 - url: https://github.com/aveva
   type: SDKs
+- url: openapi/osisoft-pi-web-api-openapi.yml
+  type: OpenAPI
+- url: json-schema/osisoft-pi-point-schema.json
+  type: JSONSchema
+- url: json-schema/osisoft-pi-timed-value-schema.json
+  type: JSONSchema
+- url: json-ld/osisoft-pi-context.jsonld
+  type: JSONLDContext
 maintainers:
 - name: Kin Lane
   email: kin@apievangelist.com

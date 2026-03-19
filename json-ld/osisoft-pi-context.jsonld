@@ -1,0 +1,97 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "pi": "https://docs.aveva.com/bundle/pi-web-api-reference/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ssn": "http://www.w3.org/ns/ssn/",
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "qudt": "http://qudt.org/schema/qudt/",
+
+    "PIPoint": {
+      "@id": "sosa:ObservableProperty",
+      "@type": "@id"
+    },
+    "WebId": {
+      "@id": "schema:identifier"
+    },
+    "Id": {
+      "@id": "schema:identifier",
+      "@type": "xsd:integer"
+    },
+    "Name": {
+      "@id": "schema:name"
+    },
+    "Path": {
+      "@id": "pi:path"
+    },
+    "PointType": {
+      "@id": "pi:pointType"
+    },
+    "EngineeringUnits": {
+      "@id": "qudt:unit"
+    },
+    "Description": {
+      "@id": "schema:description"
+    },
+
+    "TimedValue": {
+      "@id": "sosa:Observation",
+      "@type": "@id"
+    },
+    "Timestamp": {
+      "@id": "sosa:resultTime",
+      "@type": "xsd:dateTime"
+    },
+    "Value": {
+      "@id": "sosa:hasSimpleResult"
+    },
+    "Good": {
+      "@id": "pi:goodQuality",
+      "@type": "xsd:boolean"
+    },
+    "Questionable": {
+      "@id": "pi:questionable",
+      "@type": "xsd:boolean"
+    },
+    "Substituted": {
+      "@id": "pi:substituted",
+      "@type": "xsd:boolean"
+    },
+    "UnitsAbbreviation": {
+      "@id": "qudt:unit"
+    },
+
+    "Element": {
+      "@id": "ssn:System",
+      "@type": "@id"
+    },
+    "Attribute": {
+      "@id": "ssn:Property",
+      "@type": "@id"
+    },
+    "HasChildren": {
+      "@id": "pi:hasChildren",
+      "@type": "xsd:boolean"
+    },
+    "TemplateName": {
+      "@id": "pi:templateName"
+    },
+
+    "EventFrame": {
+      "@id": "schema:Event",
+      "@type": "@id"
+    },
+    "StartTime": {
+      "@id": "schema:startDate",
+      "@type": "xsd:dateTime"
+    },
+    "EndTime": {
+      "@id": "schema:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "Severity": {
+      "@id": "pi:severity"
+    }
+  }
+}

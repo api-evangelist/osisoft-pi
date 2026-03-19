@@ -1,0 +1,813 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web API
+  description: >-
+    OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing
+    the PI System process historian. APIs enable real-time and historical time-series
+    data retrieval, event frame queries, asset framework hierarchy navigation, and
+    calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+  - url: https://{piwebapi_host}/piwebapi
+    description: PI Web API server
+    variables:
+      piwebapi_host:
+        default: piwebapi.example.com
+        description: PI Web API server hostname
+
+security:
+  - basicAuth: []
+  - kerberos: []
+
+tags:
+  - name: PIPoints
+    description: PI point (tag) management and data
+  - name: Streams
+    description: Time-series data streams
+  - name: BatchRequests
+    description: Batch and parallel request execution
+  - name: AssetServers
+    description: Asset Framework server navigation
+  - name: AssetDatabases
+    description: AF database management
+  - name: Elements
+    description: AF element management
+  - name: Attributes
+    description: AF attribute management
+  - name: EventFrames
+    description: Event frame query and management
+  - name: DataServers
+    description: PI Data Archive server management
+
+paths:
+  /dataservers:
+    get:
+      operationId: listDataServers
+      summary: List PI Data Archive servers
+      description: Returns all registered PI Data Archive servers accessible via this PI Web API instance.
+      tags:
+        - DataServers
+      parameters:
+        - name: selectedFields
+          in: query
+          description: Comma-separated list of fields to return
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of data servers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataServer'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /dataservers/{webId}/points:
+    get:
+      operationId: listPIPoints
+      summary: List PI points on a server
+      description: Returns PI points (tags) on the specified PI Data Archive server with optional name filtering.
+      tags:
+        - PIPoints
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: nameFilter
+          in: query
+          description: Wildcard filter for tag names (e.g. *.FLOW)
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Filter by point type
+          schema:
+            type: string
+            enum: [Float16, Float32, Float64, Int16, Int32, Digital, Timestamp, String]
+        - name: maxCount
+          in: query
+          schema:
+            type: integer
+            default: 1000
+            maximum: 10000
+        - name: startIndex
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: PI point list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PIPoint'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /points/{webId}:
+    get:
+      operationId: getPIPoint
+      summary: Get a PI point
+      description: Returns PI point configuration and metadata.
+      tags:
+        - PIPoints
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: PI point details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PIPoint'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /streams/{webId}/value:
+    get:
+      operationId: getStreamValue
+      summary: Get current stream value
+      description: Returns the current (snapshot) value for a PI point or AF attribute stream.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: desiredUnits
+          in: query
+          description: Unit of measure for the returned value
+          schema:
+            type: string
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Current stream value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimedValue'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /streams/{webId}/recorded:
+    get:
+      operationId: getStreamRecorded
+      summary: Get recorded stream values
+      description: Returns archive (recorded) values for a PI point or AF attribute within a time range.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: startTime
+          in: query
+          description: Start time (absolute or relative, e.g. "*-1d" or "2026-03-01T00:00:00Z")
+          schema:
+            type: string
+            default: '*-1d'
+        - name: endTime
+          in: query
+          description: End time
+          schema:
+            type: string
+            default: '*'
+        - name: boundaryType
+          in: query
+          schema:
+            type: string
+            enum: [Inside, Outside, Interpolated]
+            default: Inside
+        - name: maxCount
+          in: query
+          schema:
+            type: integer
+            default: 1000
+        - name: desiredUnits
+          in: query
+          schema:
+            type: string
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Recorded values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimedValue'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /streams/{webId}/interpolated:
+    get:
+      operationId: getStreamInterpolated
+      summary: Get interpolated stream values
+      description: Returns interpolated values at a fixed time interval within a time range.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: startTime
+          in: query
+          schema:
+            type: string
+            default: '*-1d'
+        - name: endTime
+          in: query
+          schema:
+            type: string
+            default: '*'
+        - name: interval
+          in: query
+          description: Interval between values (e.g. "1h", "5m")
+          schema:
+            type: string
+            default: '1h'
+        - name: desiredUnits
+          in: query
+          schema:
+            type: string
+        - name: maxCount
+          in: query
+          schema:
+            type: integer
+            default: 1000
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Interpolated values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimedValue'
+
+  /streams/{webId}/summary:
+    get:
+      operationId: getStreamSummary
+      summary: Get stream summary statistics
+      description: Returns statistical summaries (min, max, average, count, etc.) for a stream over a time range.
+      tags:
+        - Streams
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: startTime
+          in: query
+          schema:
+            type: string
+            default: '*-1d'
+        - name: endTime
+          in: query
+          schema:
+            type: string
+            default: '*'
+        - name: summaryType
+          in: query
+          description: Comma-separated summary types
+          schema:
+            type: string
+            example: Minimum,Maximum,Average,StdDev,Count
+        - name: calculationBasis
+          in: query
+          schema:
+            type: string
+            enum: [TimeWeighted, EventWeighted]
+            default: TimeWeighted
+      responses:
+        '200':
+          description: Summary statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StreamSummary'
+
+  /assetservers:
+    get:
+      operationId: listAssetServers
+      summary: List Asset Framework servers
+      description: Returns all registered PI Asset Framework (AF) servers.
+      tags:
+        - AssetServers
+      responses:
+        '200':
+          description: Asset server list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AssetServer'
+
+  /assetdatabases/{webId}/elements:
+    get:
+      operationId: listElements
+      summary: List AF elements
+      description: Returns top-level AF elements in an asset database.
+      tags:
+        - Elements
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: nameFilter
+          in: query
+          schema:
+            type: string
+        - name: templateName
+          in: query
+          schema:
+            type: string
+        - name: maxCount
+          in: query
+          schema:
+            type: integer
+            default: 1000
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Element list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Element'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+
+  /elements/{webId}/attributes:
+    get:
+      operationId: listAttributes
+      summary: List element attributes
+      description: Returns attributes of an AF element.
+      tags:
+        - Attributes
+      parameters:
+        - $ref: '#/components/parameters/WebId'
+        - name: nameFilter
+          in: query
+          schema:
+            type: string
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Attribute list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attribute'
+
+  /eventframes:
+    get:
+      operationId: listEventFrames
+      summary: Query event frames
+      description: Returns event frames matching specified criteria within a time range.
+      tags:
+        - EventFrames
+      parameters:
+        - name: databaseWebId
+          in: query
+          required: true
+          description: AF database WebId to search
+          schema:
+            type: string
+        - name: startTime
+          in: query
+          schema:
+            type: string
+            default: '*-7d'
+        - name: endTime
+          in: query
+          schema:
+            type: string
+            default: '*'
+        - name: nameFilter
+          in: query
+          schema:
+            type: string
+        - name: templateName
+          in: query
+          schema:
+            type: string
+        - name: maxCount
+          in: query
+          schema:
+            type: integer
+            default: 1000
+        - name: selectedFields
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event frame list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventFrame'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+
+  /batch:
+    post:
+      operationId: executeBatch
+      summary: Execute a batch request
+      description: >-
+        Executes multiple PI Web API requests in a single HTTP call. Supports
+        sequential and parallel execution with parameter substitution between requests.
+      tags:
+        - BatchRequests
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/BatchRequest'
+      responses:
+        '207':
+          description: Batch results (one per request)
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/BatchResponse'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication
+
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
+
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+    DataServer:
+      type: object
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Path:
+          type: string
+          description: PI path (\\ServerName)
+        IsConnected:
+          type: boolean
+        ServerVersion:
+          type: string
+        ServerTime:
+          type: string
+          format: date-time
+        Links:
+          type: object
+
+    PIPoint:
+      type: object
+      description: A PI point (tag) definition
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: integer
+        Name:
+          type: string
+          description: Tag name
+        Path:
+          type: string
+          description: Full PI path (\\Server\TagName)
+        PointType:
+          type: string
+          enum: [Float16, Float32, Float64, Int16, Int32, Digital, Timestamp, String]
+        EngineeringUnits:
+          type: string
+        Description:
+          type: string
+        Descriptor:
+          type: string
+        PointClass:
+          type: string
+        Zero:
+          type: number
+          format: double
+        Span:
+          type: number
+          format: double
+        Step:
+          type: boolean
+          description: True if values change as step function
+        Future:
+          type: boolean
+
+    TimedValue:
+      type: object
+      description: A PI time-series value with timestamp
+      properties:
+        Timestamp:
+          type: string
+          format: date-time
+        Value:
+          description: Value; numeric, string, or digital state object
+          oneOf:
+            - type: number
+            - type: string
+            - type: object
+              properties:
+                Name:
+                  type: string
+                Value:
+                  type: integer
+        Good:
+          type: boolean
+          description: True if value is of good quality
+        Questionable:
+          type: boolean
+        Substituted:
+          type: boolean
+        Annotated:
+          type: boolean
+        UnitsAbbreviation:
+          type: string
+
+    StreamSummary:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum: [Minimum, Maximum, Average, StdDev, Total, Count, Range, PercentGood]
+        Value:
+          $ref: '#/components/schemas/TimedValue'
+
+    AssetServer:
+      type: object
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Path:
+          type: string
+        IsConnected:
+          type: boolean
+        ServerVersion:
+          type: string
+
+    Element:
+      type: object
+      description: A PI AF element
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Description:
+          type: string
+        Path:
+          type: string
+        TemplateName:
+          type: string
+        HasChildren:
+          type: boolean
+        CategoryNames:
+          type: array
+          items:
+            type: string
+
+    Attribute:
+      type: object
+      description: A PI AF attribute
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Description:
+          type: string
+        Path:
+          type: string
+        Type:
+          type: string
+        TypeQualifier:
+          type: string
+        DataReference:
+          type: string
+          description: Data reference plugin type (e.g. PI Point)
+        ConfigString:
+          type: string
+          description: Configuration string for data reference
+        IsManualDataEntry:
+          type: boolean
+        HasChildren:
+          type: boolean
+        EngineeringUnits:
+          type: string
+
+    EventFrame:
+      type: object
+      description: A PI AF event frame
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Description:
+          type: string
+        TemplateName:
+          type: string
+        StartTime:
+          type: string
+          format: date-time
+        EndTime:
+          type: string
+          format: date-time
+          nullable: true
+        AcknowledgedBy:
+          type: string
+        AcknowledgedDate:
+          type: string
+          format: date-time
+          nullable: true
+        CanBeAcknowledged:
+          type: boolean
+        IsAcknowledged:
+          type: boolean
+        IsAnnotated:
+          type: boolean
+        Severity:
+          type: string
+          enum: [None, OK, Information, Warning, Minor, Major, Critical]
+
+    BatchRequest:
+      type: object
+      properties:
+        Method:
+          type: string
+          enum: [GET, POST, PUT, PATCH, DELETE]
+        Resource:
+          type: string
+          description: Relative URL of the PI Web API resource
+        ParentIds:
+          type: array
+          items:
+            type: string
+          description: IDs of batch requests that must complete before this one
+        Parameters:
+          type: array
+          items:
+            type: string
+          description: Parameter substitution references (e.g. {0}.Content.WebId)
+        Headers:
+          type: object
+          additionalProperties:
+            type: string
+
+    BatchResponse:
+      type: object
+      properties:
+        Status:
+          type: integer
+        Headers:
+          type: object
+          additionalProperties:
+            type: string
+        Content:
+          type: object
+
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+
+    Error:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            type: string

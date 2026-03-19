@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/osisoft-pi/json-schema/osisoft-pi-timed-value-schema.json",
+  "title": "OSIsoft PI Timed Value",
+  "description": "Schema for a PI System time-series data point containing a timestamp, value, and quality information.",
+  "type": "object",
+  "properties": {
+    "Timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "UTC timestamp of the value"
+    },
+    "Value": {
+      "description": "The data value; numeric for analog points, string or object for digital/string points",
+      "oneOf": [
+        {
+          "type": "number",
+          "description": "Numeric value for Float or Int point types"
+        },
+        {
+          "type": "string",
+          "description": "String value for String point types"
+        },
+        {
+          "type": "object",
+          "description": "Digital state object for Digital point types",
+          "properties": {
+            "Name": {
+              "type": "string",
+              "description": "Digital state name (e.g. Shutdown, Running, Fault)"
+            },
+            "Value": {
+              "type": "integer",
+              "description": "Digital state numeric code"
+            }
+          },
+          "required": ["Name", "Value"]
+        }
+      ]
+    },
+    "Good": {
+      "type": "boolean",
+      "description": "True if the value quality is Good (not a system digital state)"
+    },
+    "Questionable": {
+      "type": "boolean",
+      "description": "True if the value is flagged as questionable by the data source"
+    },
+    "Substituted": {
+      "type": "boolean",
+      "description": "True if the value has been manually substituted"
+    },
+    "Annotated": {
+      "type": "boolean",
+      "description": "True if the value has an annotation"
+    },
+    "UnitsAbbreviation": {
+      "type": "string",
+      "description": "Unit of measure abbreviation"
+    }
+  },
+  "required": ["Timestamp"],
+  "examples": [
+    {
+      "Timestamp": "2026-03-18T14:30:00Z",
+      "Value": 87.3,
+      "Good": true,
+      "Questionable": false,
+      "Substituted": false,
+      "Annotated": false,
+      "UnitsAbbreviation": "°C"
+    },
+    {
+      "Timestamp": "2026-03-18T14:25:00Z",
+      "Value": {
+        "Name": "Running",
+        "Value": 2
+      },
+      "Good": true,
+      "Questionable": false,
+      "Substituted": false,
+      "Annotated": false,
+      "UnitsAbbreviation": ""
+    }
+  ]
+}
