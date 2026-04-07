@@ -1,18 +1,16 @@
 aid: osisoft-pi
-url: 
-  https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/apis.yml
 apis:
   - aid: osisoft-pi:pi-web-api
     name: OSIsoft PI Web API
     tags:
-      - Manufacturing
       - Energy
+      - Manufacturing
       - Process Historian
-      - Time Series
-      - SCADA
       - REST
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
+      - SCADA
+      - Time Series
+    image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
     humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
     baseURL: https://piwebapi.example.com/piwebapi
     properties:
@@ -37,13 +35,12 @@ apis:
   - aid: osisoft-pi:aveva-connect-api
     name: AVEVA CONNECT Data Services API
     tags:
-      - Manufacturing
       - Cloud
-      - Time Series
       - IoT
+      - Manufacturing
       - REST
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
+      - Time Series
+    image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
     humanURL: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
     baseURL: https://api.aveva.com
     properties:
@@ -57,12 +54,11 @@ apis:
   - aid: osisoft-pi:pi-af-sdk
     name: OSIsoft PI AF SDK
     tags:
-      - Manufacturing
-      - Asset Framework
       - .NET
+      - Asset Framework
+      - Manufacturing
       - SDK
-    image: 
-      https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
+    image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
     humanURL: https://docs.aveva.com/
     baseURL: https://piwebapi.example.com/piwebapi
     properties:

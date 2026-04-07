@@ -26,25 +26,23 @@ security:
   - kerberos: []
 
 tags:
+  - name: AssetServers
+    description: Asset Framework server navigation
+  - name: Attributes
+    description: AF attribute management
+  - name: BatchRequests
+    description: Batch and parallel request execution
+  - name: DataServers
+    description: PI Data Archive server management
+
+  - name: Elements
+    description: AF element management
+  - name: EventFrames
+    description: Event frame query and management
   - name: PIPoints
     description: PI point (tag) management and data
   - name: Streams
     description: Time-series data streams
-  - name: BatchRequests
-    description: Batch and parallel request execution
-  - name: AssetServers
-    description: Asset Framework server navigation
-  - name: AssetDatabases
-    description: AF database management
-  - name: Elements
-    description: AF element management
-  - name: Attributes
-    description: AF attribute management
-  - name: EventFrames
-    description: Event frame query and management
-  - name: DataServers
-    description: PI Data Archive server management
-
 paths:
   /dataservers:
     get:
