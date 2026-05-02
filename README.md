@@ -1,10 +1,21 @@
-# Unknown (osisoft-pi)
+# OSIsoft PI (osisoft-pi)
+OSIsoft PI System is a real-time data management platform used by industrial organizations to capture, analyze, and visualize operational data from sensors, devices, and applications. Now part of AVEVA, the PI System provides REST and SDK access for process historian, asset framework, and cloud-native time-series data services.
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/apis.yml)
 
+## Scope
+
+- **Type:** Index
+- **Position:** Consuming
+- **Access:** 3rd-Party
+
+## Tags:
+
+ - Manufacturing, Energy, Time Series, Process Historian, SCADA, Industrial
+
 ## Timestamps
 
-- **Modified:** 2026-03-18 
+- **Modified:** 2026-03-18
 
 ## APIs
 
@@ -73,5 +84,7 @@ OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmati
 - [JSONLDContext](json-ld/osisoft-pi-context.jsonld)
 
 ## Maintainers
+
+**FN:** Kin Lane
 
 **Email:** kin@apievangelist.com
