@@ -4,91 +4,43 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: osisoft-pi
 providerId: osisoft-pi
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+notes: No public rate-limit documentation. PI Web API is typically deployed on customer-controlled
+  infrastructure (on-prem or self-managed cloud), so throughput is bounded by the customer's
+  PI Server sizing and IIS configuration rather than a vendor-published quota. AVEVA CONNECT
+  Data Services rate limits, where they exist, are gated behind authenticated developer documentation.
 tags:
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the osisoft-pi API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Industrial
+  - Time Series
+  - Process Historian
+description: PI System APIs do not publish per-account rate limits. PI Web API throughput
+  is governed by customer-deployed PI Server / IIS capacity. AVEVA CONNECT Data Services
+  limits are enterprise-customer-specific and disclosed under contract.
+sources:
+  - https://www.aveva.com/en/products/aveva-pi-system/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - OSIsoft PI Web API
-      - AVEVA CONNECT Data Services API
-      - OSIsoft PI AF SDK
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - OSIsoft PI Web API
-      - AVEVA CONNECT Data Services API
-      - OSIsoft PI AF SDK
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - OSIsoft PI Web API
-      - AVEVA CONNECT Data Services API
-      - OSIsoft PI AF SDK
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - OSIsoft PI Web API
-      - AVEVA CONNECT Data Services API
-      - OSIsoft PI AF SDK
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - OSIsoft PI Web API
-      - AVEVA CONNECT Data Services API
-      - OSIsoft PI AF SDK
+  - name: PI Web API - Customer-Hosted
+    scope: deployment
+    metric: varies
+    limit: bounded by customer-deployed PI Server and IIS configuration
+    notes: PI Web API runs on customer infrastructure; throughput depends on installation
+      sizing rather than a vendor-set quota.
+  - name: AVEVA CONNECT Data Services
+    scope: tenant
+    metric: varies
+    limit: see AVEVA CONNECT documentation behind developer login
+    notes: Cloud service limits are tenant-specific and disclosed under enterprise agreement.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Customer-Operated Throttling
+    description: Because PI Web API is typically self-hosted, throttling, retry, and backoff
+      decisions are made by the customer's API gateway or proxy in front of PI Server.
+  - name: Backoff
+    description: Standard exponential backoff with jitter is recommended on any 429 / 503
+      response.
 maintainers:
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com

@@ -1,149 +1,78 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: osisoft-pi
+providerId: osisoft-pi
+created: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
+notes: No public pricing or usage API. AVEVA PI System is sold under enterprise subscription
+  agreements; FinOps mapping below is a structural placeholder pending contractual disclosure.
+tags:
+  - FinOps
+  - FOCUS
+  - Industrial
+  - Time Series
+  - Process Historian
+description: Structural FinOps definition for AVEVA PI System (OSIsoft PI). Pricing is enterprise-subscription
+  only with no public meter rates; this artifact captures the FOCUS-shaped fields available
+  from the public product page only.
+sources:
+  - https://www.aveva.com/en/products/aveva-pi-system/
+  - https://focus.finops.org/focus-specification/v1-3/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
   dataSpec: FOCUS
   dataSpecVersion: '1.3'
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
-provider: osisoft-pi
-providerId: osisoft-pi
-publisherName: osisoft-pi
-serviceCategory: API
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - FinOps
-  - Cost Management
-  - FOCUS
-description: FinOps framework definition for the osisoft-pi API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+publisherName: AVEVA Group plc
+serviceCategory: Industrial Software
+billingModel:
+  pricingCategory: Subscription (Enterprise)
+  billingFrequency: Annual
+  billingCurrency: USD (varies by region)
+  chargeCategories:
+    - Purchase
+    - Usage
+    - Tax
+focusColumns:
+  ServiceName: AVEVA PI System
+  ServiceCategory: Industrial Software
+  ProviderName: AVEVA
+  PublisherName: AVEVA Group plc
+  InvoiceIssuerName: AVEVA Group plc
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+meters:
+  - name: pi_subscription
+    description: Annual PI System subscription, sized per deployment
+    unit: subscription-year
+    aggregation: count
+    dimensions:
+      - module
+      - deployment
+  - name: connect_data_volume
+    description: AVEVA CONNECT Data Services data volume (where applicable)
+    unit: varies
+    aggregation: sum
+    dimensions:
+      - tenant
+      - service
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: PI System usage visibility comes from the customer's own monitoring of PI
+      Server, PI Web API, and CONNECT tenant dashboards; AVEVA does not provide a public
+      cost API.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Allocate by module (PI Server, PI Vision, AF SDK, CONNECT) and by site/business
+      unit using the deployment topology; tag PI assets in the AF hierarchy by cost center.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Right-size PI Server tag counts and CONNECT data ingestion. Negotiate at
+      renewal based on actual asset/tag growth rather than initial estimates.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
-billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
-  billingCurrency: USD
-  chargeCategories:
-    - Usage
-    - Purchase
-    - Tax
-    - Credit
-    - Adjustment
-  chargeFrequency: Recurring
-focusColumns:
-  ServiceName: osisoft-pi
-  ServiceCategory: Developer Tools / API
-  ProviderName: osisoft-pi
-  PublisherName: osisoft-pi
-  InvoiceIssuerName: osisoft-pi
-  PricingCategory: Usage-Based
-  PricingUnit: request
-  BillingCurrency: USD
-  ChargeCategory: Usage
-meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
-    dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: OSIsoft PI Web API
-    baseURL: https://piwebapi.example.com/piwebapi
-    tags:
-      - Energy
-      - Manufacturing
-      - Process Historian
-      - REST
-      - SCADA
-      - Time Series
-    serviceName: OSIsoft PI Web API
-    serviceCategory: API
-  - name: AVEVA CONNECT Data Services API
-    baseURL: https://api.aveva.com
-    tags:
-      - Cloud
-      - IoT
-      - Manufacturing
-      - REST
-      - Time Series
-    serviceName: AVEVA CONNECT Data Services API
-    serviceCategory: API
-  - name: OSIsoft PI AF SDK
-    baseURL: https://piwebapi.example.com/piwebapi
-    tags:
-      - .NET
-      - Asset Framework
-      - Manufacturing
-      - SDK
-    serviceName: OSIsoft PI AF SDK
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+    description: Designate a PI System owner per site responsible for renewal forecasting
+      and license utilization tracking against the AVEVA contract.
 maintainers:
-  - name: Kin Lane
+  - FN: Kin Lane
     email: kin@apievangelist.com
