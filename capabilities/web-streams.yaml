@@ -1,0 +1,274 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OSIsoft PI Web API — Streams
+  description: 'OSIsoft PI Web API — Streams. 4 operations. Lead operation: Get interpolated stream values. Self-contained
+    Naftiko capability covering one Osisoft Pi business surface.'
+  tags:
+  - Osisoft Pi
+  - Streams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OSISOFT_PI_API_KEY: OSISOFT_PI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-streams
+    baseUri: https://{piwebapi_host}/piwebapi
+    description: OSIsoft PI Web API — Streams business capability. Self-contained, no shared references.
+    resources:
+    - name: streams-webId-interpolated
+      path: /streams/{webId}/interpolated
+      operations:
+      - name: getstreaminterpolated
+        method: GET
+        description: Get interpolated stream values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: string
+        - name: endTime
+          in: query
+          type: string
+        - name: interval
+          in: query
+          type: string
+          description: Interval between values (e.g. "1h", "5m")
+        - name: desiredUnits
+          in: query
+          type: string
+        - name: maxCount
+          in: query
+          type: integer
+        - name: selectedFields
+          in: query
+          type: string
+    - name: streams-webId-recorded
+      path: /streams/{webId}/recorded
+      operations:
+      - name: getstreamrecorded
+        method: GET
+        description: Get recorded stream values
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: string
+          description: Start time (absolute or relative, e.g. "*-1d" or "2026-03-01T00:00:00Z")
+        - name: endTime
+          in: query
+          type: string
+          description: End time
+        - name: boundaryType
+          in: query
+          type: string
+        - name: maxCount
+          in: query
+          type: integer
+        - name: desiredUnits
+          in: query
+          type: string
+        - name: selectedFields
+          in: query
+          type: string
+    - name: streams-webId-summary
+      path: /streams/{webId}/summary
+      operations:
+      - name: getstreamsummary
+        method: GET
+        description: Get stream summary statistics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: startTime
+          in: query
+          type: string
+        - name: endTime
+          in: query
+          type: string
+        - name: summaryType
+          in: query
+          type: string
+          description: Comma-separated summary types
+        - name: calculationBasis
+          in: query
+          type: string
+    - name: streams-webId-value
+      path: /streams/{webId}/value
+      operations:
+      - name: getstreamvalue
+        method: GET
+        description: Get current stream value
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: desiredUnits
+          in: query
+          type: string
+          description: Unit of measure for the returned value
+        - name: selectedFields
+          in: query
+          type: string
+    authentication:
+      type: basic
+      username: '{{env.OSISOFT_PI_USER}}'
+      password: '{{env.OSISOFT_PI_PASS}}'
+  exposes:
+  - type: rest
+    namespace: web-streams-rest
+    port: 8080
+    description: REST adapter for OSIsoft PI Web API — Streams. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/streams/{webid}/interpolated
+      name: streams-webid-interpolated
+      description: REST surface for streams-webId-interpolated.
+      operations:
+      - method: GET
+        name: getstreaminterpolated
+        description: Get interpolated stream values
+        call: web-streams.getstreaminterpolated
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          interval: rest.interval
+          desiredUnits: rest.desiredUnits
+          maxCount: rest.maxCount
+          selectedFields: rest.selectedFields
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/streams/{webid}/recorded
+      name: streams-webid-recorded
+      description: REST surface for streams-webId-recorded.
+      operations:
+      - method: GET
+        name: getstreamrecorded
+        description: Get recorded stream values
+        call: web-streams.getstreamrecorded
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          boundaryType: rest.boundaryType
+          maxCount: rest.maxCount
+          desiredUnits: rest.desiredUnits
+          selectedFields: rest.selectedFields
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/streams/{webid}/summary
+      name: streams-webid-summary
+      description: REST surface for streams-webId-summary.
+      operations:
+      - method: GET
+        name: getstreamsummary
+        description: Get stream summary statistics
+        call: web-streams.getstreamsummary
+        with:
+          startTime: rest.startTime
+          endTime: rest.endTime
+          summaryType: rest.summaryType
+          calculationBasis: rest.calculationBasis
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/streams/{webid}/value
+      name: streams-webid-value
+      description: REST surface for streams-webId-value.
+      operations:
+      - method: GET
+        name: getstreamvalue
+        description: Get current stream value
+        call: web-streams.getstreamvalue
+        with:
+          desiredUnits: rest.desiredUnits
+          selectedFields: rest.selectedFields
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-streams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OSIsoft PI Web API — Streams. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-interpolated-stream-values
+      description: Get interpolated stream values
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-streams.getstreaminterpolated
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        interval: tools.interval
+        desiredUnits: tools.desiredUnits
+        maxCount: tools.maxCount
+        selectedFields: tools.selectedFields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-recorded-stream-values
+      description: Get recorded stream values
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-streams.getstreamrecorded
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        boundaryType: tools.boundaryType
+        maxCount: tools.maxCount
+        desiredUnits: tools.desiredUnits
+        selectedFields: tools.selectedFields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stream-summary-statistics
+      description: Get stream summary statistics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-streams.getstreamsummary
+      with:
+        startTime: tools.startTime
+        endTime: tools.endTime
+        summaryType: tools.summaryType
+        calculationBasis: tools.calculationBasis
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-current-stream-value
+      description: Get current stream value
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-streams.getstreamvalue
+      with:
+        desiredUnits: tools.desiredUnits
+        selectedFields: tools.selectedFields
+      outputParameters:
+      - type: object
+        mapping: $.

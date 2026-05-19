@@ -1,0 +1,141 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OSIsoft PI Web API — PIPoints
+  description: 'OSIsoft PI Web API — PIPoints. 2 operations. Lead operation: List PI points on a server. Self-contained Naftiko
+    capability covering one Osisoft Pi business surface.'
+  tags:
+  - Osisoft Pi
+  - PIPoints
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OSISOFT_PI_API_KEY: OSISOFT_PI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-pipoints
+    baseUri: https://{piwebapi_host}/piwebapi
+    description: OSIsoft PI Web API — PIPoints business capability. Self-contained, no shared references.
+    resources:
+    - name: dataservers-webId-points
+      path: /dataservers/{webId}/points
+      operations:
+      - name: listpipoints
+        method: GET
+        description: List PI points on a server
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: nameFilter
+          in: query
+          type: string
+          description: Wildcard filter for tag names (e.g. *.FLOW)
+        - name: type
+          in: query
+          type: string
+          description: Filter by point type
+        - name: maxCount
+          in: query
+          type: integer
+        - name: startIndex
+          in: query
+          type: integer
+        - name: selectedFields
+          in: query
+          type: string
+    - name: points-webId
+      path: /points/{webId}
+      operations:
+      - name: getpipoint
+        method: GET
+        description: Get a PI point
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: selectedFields
+          in: query
+          type: string
+    authentication:
+      type: basic
+      username: '{{env.OSISOFT_PI_USER}}'
+      password: '{{env.OSISOFT_PI_PASS}}'
+  exposes:
+  - type: rest
+    namespace: web-pipoints-rest
+    port: 8080
+    description: REST adapter for OSIsoft PI Web API — PIPoints. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/dataservers/{webid}/points
+      name: dataservers-webid-points
+      description: REST surface for dataservers-webId-points.
+      operations:
+      - method: GET
+        name: listpipoints
+        description: List PI points on a server
+        call: web-pipoints.listpipoints
+        with:
+          nameFilter: rest.nameFilter
+          type: rest.type
+          maxCount: rest.maxCount
+          startIndex: rest.startIndex
+          selectedFields: rest.selectedFields
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/points/{webid}
+      name: points-webid
+      description: REST surface for points-webId.
+      operations:
+      - method: GET
+        name: getpipoint
+        description: Get a PI point
+        call: web-pipoints.getpipoint
+        with:
+          selectedFields: rest.selectedFields
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-pipoints-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OSIsoft PI Web API — PIPoints. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-pi-points-server
+      description: List PI points on a server
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-pipoints.listpipoints
+      with:
+        nameFilter: tools.nameFilter
+        type: tools.type
+        maxCount: tools.maxCount
+        startIndex: tools.startIndex
+        selectedFields: tools.selectedFields
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pi-point
+      description: Get a PI point
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-pipoints.getpipoint
+      with:
+        selectedFields: tools.selectedFields
+      outputParameters:
+      - type: object
+        mapping: $.

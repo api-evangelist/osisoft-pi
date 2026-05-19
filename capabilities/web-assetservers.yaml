@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: OSIsoft PI Web API — AssetServers
+  description: 'OSIsoft PI Web API — AssetServers. 1 operations. Lead operation: List Asset Framework servers. Self-contained
+    Naftiko capability covering one Osisoft Pi business surface.'
+  tags:
+  - Osisoft Pi
+  - AssetServers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    OSISOFT_PI_API_KEY: OSISOFT_PI_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: web-assetservers
+    baseUri: https://{piwebapi_host}/piwebapi
+    description: OSIsoft PI Web API — AssetServers business capability. Self-contained, no shared references.
+    resources:
+    - name: assetservers
+      path: /assetservers
+      operations:
+      - name: listassetservers
+        method: GET
+        description: List Asset Framework servers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.OSISOFT_PI_USER}}'
+      password: '{{env.OSISOFT_PI_PASS}}'
+  exposes:
+  - type: rest
+    namespace: web-assetservers-rest
+    port: 8080
+    description: REST adapter for OSIsoft PI Web API — AssetServers. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/assetservers
+      name: assetservers
+      description: REST surface for assetservers.
+      operations:
+      - method: GET
+        name: listassetservers
+        description: List Asset Framework servers
+        call: web-assetservers.listassetservers
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: web-assetservers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for OSIsoft PI Web API — AssetServers. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-asset-framework-servers
+      description: List Asset Framework servers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: web-assetservers.listassetservers
+      outputParameters:
+      - type: object
+        mapping: $.
