@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/osisoft-pi-web-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication
+  sources:
+  - openapi/osisoft-pi-web-api-openapi.yml
+- name: kerberos
+  type: http
+  scheme: negotiate
+  description: Kerberos/Windows Integrated Authentication
+  sources:
+  - openapi/osisoft-pi-web-api-openapi.yml
