@@ -67,6 +67,8 @@ apis:
       OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access to the PI System asset
       hierarchy, time-series data, and event frames from on-premises PI servers.
 common:
+  - type: AgenticAccess
+    url: agentic-access/osisoft-pi-agentic-access.yml
   - type: TrustCenter
     url: security/osisoft-pi-trust-center.yml
   - type: VulnerabilityDisclosure
