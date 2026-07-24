@@ -1,0 +1,99 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers BatchRequests API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: BatchRequests
+  description: Batch and parallel request execution
+paths:
+  /batch:
+    post:
+      operationId: executeBatch
+      summary: Execute a batch request
+      description: Executes multiple PI Web API requests in a single HTTP call. Supports sequential and parallel execution with parameter substitution between requests.
+      tags:
+      - BatchRequests
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/BatchRequest'
+      responses:
+        '207':
+          description: Batch results (one per request)
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/BatchResponse'
+components:
+  schemas:
+    BatchRequest:
+      type: object
+      properties:
+        Method:
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          - DELETE
+        Resource:
+          type: string
+          description: Relative URL of the PI Web API resource
+        ParentIds:
+          type: array
+          items:
+            type: string
+          description: IDs of batch requests that must complete before this one
+        Parameters:
+          type: array
+          items:
+            type: string
+          description: Parameter substitution references (e.g. {0}.Content.WebId)
+        Headers:
+          type: object
+          additionalProperties:
+            type: string
+    BatchResponse:
+      type: object
+      properties:
+        Status:
+          type: integer
+        Headers:
+          type: object
+          additionalProperties:
+            type: string
+        Content:
+          type: object
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication

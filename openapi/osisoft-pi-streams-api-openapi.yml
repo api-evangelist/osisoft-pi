@@ -1,0 +1,301 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers Streams API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: Streams
+  description: Time-series data streams
+paths:
+  /streams/{webId}/value:
+    get:
+      operationId: getStreamValue
+      summary: Get current stream value
+      description: Returns the current (snapshot) value for a PI point or AF attribute stream.
+      tags:
+      - Streams
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: desiredUnits
+        in: query
+        description: Unit of measure for the returned value
+        schema:
+          type: string
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Current stream value
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimedValue'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /streams/{webId}/recorded:
+    get:
+      operationId: getStreamRecorded
+      summary: Get recorded stream values
+      description: Returns archive (recorded) values for a PI point or AF attribute within a time range.
+      tags:
+      - Streams
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: startTime
+        in: query
+        description: Start time (absolute or relative, e.g. "*-1d" or "2026-03-01T00:00:00Z")
+        schema:
+          type: string
+          default: '*-1d'
+      - name: endTime
+        in: query
+        description: End time
+        schema:
+          type: string
+          default: '*'
+      - name: boundaryType
+        in: query
+        schema:
+          type: string
+          enum:
+          - Inside
+          - Outside
+          - Interpolated
+          default: Inside
+      - name: maxCount
+        in: query
+        schema:
+          type: integer
+          default: 1000
+      - name: desiredUnits
+        in: query
+        schema:
+          type: string
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Recorded values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimedValue'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /streams/{webId}/interpolated:
+    get:
+      operationId: getStreamInterpolated
+      summary: Get interpolated stream values
+      description: Returns interpolated values at a fixed time interval within a time range.
+      tags:
+      - Streams
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: startTime
+        in: query
+        schema:
+          type: string
+          default: '*-1d'
+      - name: endTime
+        in: query
+        schema:
+          type: string
+          default: '*'
+      - name: interval
+        in: query
+        description: Interval between values (e.g. "1h", "5m")
+        schema:
+          type: string
+          default: 1h
+      - name: desiredUnits
+        in: query
+        schema:
+          type: string
+      - name: maxCount
+        in: query
+        schema:
+          type: integer
+          default: 1000
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Interpolated values
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TimedValue'
+  /streams/{webId}/summary:
+    get:
+      operationId: getStreamSummary
+      summary: Get stream summary statistics
+      description: Returns statistical summaries (min, max, average, count, etc.) for a stream over a time range.
+      tags:
+      - Streams
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: startTime
+        in: query
+        schema:
+          type: string
+          default: '*-1d'
+      - name: endTime
+        in: query
+        schema:
+          type: string
+          default: '*'
+      - name: summaryType
+        in: query
+        description: Comma-separated summary types
+        schema:
+          type: string
+          example: Minimum,Maximum,Average,StdDev,Count
+      - name: calculationBasis
+        in: query
+        schema:
+          type: string
+          enum:
+          - TimeWeighted
+          - EventWeighted
+          default: TimeWeighted
+      responses:
+        '200':
+          description: Summary statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/StreamSummary'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            type: string
+    StreamSummary:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Minimum
+          - Maximum
+          - Average
+          - StdDev
+          - Total
+          - Count
+          - Range
+          - PercentGood
+        Value:
+          $ref: '#/components/schemas/TimedValue'
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+    TimedValue:
+      type: object
+      description: A PI time-series value with timestamp
+      properties:
+        Timestamp:
+          type: string
+          format: date-time
+        Value:
+          description: Value; numeric, string, or digital state object
+          oneOf:
+          - type: number
+          - type: string
+          - type: object
+            properties:
+              Name:
+                type: string
+              Value:
+                type: integer
+        Good:
+          type: boolean
+          description: True if value is of good quality
+        Questionable:
+          type: boolean
+        Substituted:
+          type: boolean
+        Annotated:
+          type: boolean
+        UnitsAbbreviation:
+          type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication

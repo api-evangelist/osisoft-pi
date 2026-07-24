@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers Attributes API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: Attributes
+  description: AF attribute management
+paths:
+  /elements/{webId}/attributes:
+    get:
+      operationId: listAttributes
+      summary: List element attributes
+      description: Returns attributes of an AF element.
+      tags:
+      - Attributes
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: nameFilter
+        in: query
+        schema:
+          type: string
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Attribute list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Attribute'
+components:
+  schemas:
+    Attribute:
+      type: object
+      description: A PI AF attribute
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Description:
+          type: string
+        Path:
+          type: string
+        Type:
+          type: string
+        TypeQualifier:
+          type: string
+        DataReference:
+          type: string
+          description: Data reference plugin type (e.g. PI Point)
+        ConfigString:
+          type: string
+          description: Configuration string for data reference
+        IsManualDataEntry:
+          type: boolean
+        HasChildren:
+          type: boolean
+        EngineeringUnits:
+          type: string
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication

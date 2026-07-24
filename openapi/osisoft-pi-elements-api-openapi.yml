@@ -1,0 +1,124 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers Elements API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: Elements
+  description: AF element management
+paths:
+  /assetdatabases/{webId}/elements:
+    get:
+      operationId: listElements
+      summary: List AF elements
+      description: Returns top-level AF elements in an asset database.
+      tags:
+      - Elements
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: nameFilter
+        in: query
+        schema:
+          type: string
+      - name: templateName
+        in: query
+        schema:
+          type: string
+      - name: maxCount
+        in: query
+        schema:
+          type: integer
+          default: 1000
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Element list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Element'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+components:
+  schemas:
+    Element:
+      type: object
+      description: A PI AF element
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Description:
+          type: string
+        Path:
+          type: string
+        TemplateName:
+          type: string
+        HasChildren:
+          type: boolean
+        CategoryNames:
+          type: array
+          items:
+            type: string
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication

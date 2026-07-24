@@ -1,0 +1,118 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers DataServers API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: DataServers
+  description: PI Data Archive server management
+paths:
+  /dataservers:
+    get:
+      operationId: listDataServers
+      summary: List PI Data Archive servers
+      description: Returns all registered PI Data Archive servers accessible via this PI Web API instance.
+      tags:
+      - DataServers
+      parameters:
+      - name: selectedFields
+        in: query
+        description: Comma-separated list of fields to return
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of data servers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/DataServer'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    DataServer:
+      type: object
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Path:
+          type: string
+          description: PI path (\\ServerName)
+        IsConnected:
+          type: boolean
+        ServerVersion:
+          type: string
+        ServerTime:
+          type: string
+          format: date-time
+        Links:
+          type: object
+    Error:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            type: string
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication

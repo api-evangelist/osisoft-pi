@@ -1,0 +1,71 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: AssetServers
+  description: Asset Framework server navigation
+paths:
+  /assetservers:
+    get:
+      operationId: listAssetServers
+      summary: List Asset Framework servers
+      description: Returns all registered PI Asset Framework (AF) servers.
+      tags:
+      - AssetServers
+      responses:
+        '200':
+          description: Asset server list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AssetServer'
+components:
+  schemas:
+    AssetServer:
+      type: object
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Path:
+          type: string
+        IsConnected:
+          type: boolean
+        ServerVersion:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication

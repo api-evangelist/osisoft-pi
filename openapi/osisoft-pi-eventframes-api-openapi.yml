@@ -1,0 +1,152 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers EventFrames API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: EventFrames
+  description: Event frame query and management
+paths:
+  /eventframes:
+    get:
+      operationId: listEventFrames
+      summary: Query event frames
+      description: Returns event frames matching specified criteria within a time range.
+      tags:
+      - EventFrames
+      parameters:
+      - name: databaseWebId
+        in: query
+        required: true
+        description: AF database WebId to search
+        schema:
+          type: string
+      - name: startTime
+        in: query
+        schema:
+          type: string
+          default: '*-7d'
+      - name: endTime
+        in: query
+        schema:
+          type: string
+          default: '*'
+      - name: nameFilter
+        in: query
+        schema:
+          type: string
+      - name: templateName
+        in: query
+        schema:
+          type: string
+      - name: maxCount
+        in: query
+        schema:
+          type: integer
+          default: 1000
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Event frame list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EventFrame'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+components:
+  schemas:
+    EventFrame:
+      type: object
+      description: A PI AF event frame
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Description:
+          type: string
+        TemplateName:
+          type: string
+        StartTime:
+          type: string
+          format: date-time
+        EndTime:
+          type: string
+          format: date-time
+          nullable: true
+        AcknowledgedBy:
+          type: string
+        AcknowledgedDate:
+          type: string
+          format: date-time
+          nullable: true
+        CanBeAcknowledged:
+          type: boolean
+        IsAcknowledged:
+          type: boolean
+        IsAnnotated:
+          type: boolean
+        Severity:
+          type: string
+          enum:
+          - None
+          - OK
+          - Information
+          - Warning
+          - Minor
+          - Major
+          - Critical
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication

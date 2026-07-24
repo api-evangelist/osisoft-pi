@@ -1,0 +1,200 @@
+openapi: 3.1.0
+info:
+  title: OSIsoft PI Web AssetServers PIPoints API
+  description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+  version: 2023.2.0
+  contact:
+    name: AVEVA Support
+    url: https://softwaresupport.aveva.com
+  license:
+    name: AVEVA Software License
+    url: https://www.aveva.com/legal/
+servers:
+- url: https://{piwebapi_host}/piwebapi
+  description: PI Web API server
+  variables:
+    piwebapi_host:
+      default: piwebapi.example.com
+      description: PI Web API server hostname
+security:
+- basicAuth: []
+- kerberos: []
+tags:
+- name: PIPoints
+  description: PI point (tag) management and data
+paths:
+  /dataservers/{webId}/points:
+    get:
+      operationId: listPIPoints
+      summary: List PI points on a server
+      description: Returns PI points (tags) on the specified PI Data Archive server with optional name filtering.
+      tags:
+      - PIPoints
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: nameFilter
+        in: query
+        description: Wildcard filter for tag names (e.g. *.FLOW)
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filter by point type
+        schema:
+          type: string
+          enum:
+          - Float16
+          - Float32
+          - Float64
+          - Int16
+          - Int32
+          - Digital
+          - Timestamp
+          - String
+      - name: maxCount
+        in: query
+        schema:
+          type: integer
+          default: 1000
+          maximum: 10000
+      - name: startIndex
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: PI point list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PIPoint'
+                  Links:
+                    $ref: '#/components/schemas/PaginationLinks'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /points/{webId}:
+    get:
+      operationId: getPIPoint
+      summary: Get a PI point
+      description: Returns PI point configuration and metadata.
+      tags:
+      - PIPoints
+      parameters:
+      - $ref: '#/components/parameters/WebId'
+      - name: selectedFields
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: PI point details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PIPoint'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            type: string
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+    PIPoint:
+      type: object
+      description: A PI point (tag) definition
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: integer
+        Name:
+          type: string
+          description: Tag name
+        Path:
+          type: string
+          description: Full PI path (\\Server\TagName)
+        PointType:
+          type: string
+          enum:
+          - Float16
+          - Float32
+          - Float64
+          - Int16
+          - Int32
+          - Digital
+          - Timestamp
+          - String
+        EngineeringUnits:
+          type: string
+        Description:
+          type: string
+        Descriptor:
+          type: string
+        PointClass:
+          type: string
+        Zero:
+          type: number
+          format: double
+        Span:
+          type: number
+          format: double
+        Step:
+          type: boolean
+          description: True if values change as step function
+        Future:
+          type: boolean
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+    kerberos:
+      type: http
+      scheme: negotiate
+      description: Kerberos/Windows Integrated Authentication
