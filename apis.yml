@@ -1,71 +1,216 @@
 aid: osisoft-pi
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/osisoft-pi.png
 url: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/apis.yml
 apis:
-  - aid: osisoft-pi:pi-web-api
-    name: OSIsoft PI Web API
-    tags:
-      - Energy
-      - Manufacturing
-      - Process Historian
-      - REST
-      - SCADA
-      - Time Series
-    image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
-    humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
-    baseURL: https://piwebapi.example.com/piwebapi
-    properties:
-      - url: https://docs.aveva.com/bundle/pi-web-api-reference
-        type: Documentation
-      - url: https://docs.aveva.com/bundle/pi-web-api-reference
-        type: Reference
-      - url: https://docs.aveva.com/bundle/pi-web-api-getting-started
-        type: GettingStarted
-      - url: https://github.com/aveva/sample-pi_web_api-common_actions-python
-        type: SDKs
-      - url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
-        type: SDKs
-      - url: openapi/osisoft-pi-web-api-openapi.yml
-        type: OpenAPI
-    description: >-
-      OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian.
-      APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy
-      navigation, and calculated data for industrial process monitoring.
-  - aid: osisoft-pi:aveva-connect-api
-    name: AVEVA CONNECT Data Services API
-    tags:
-      - Cloud
-      - IoT
-      - Manufacturing
-      - REST
-      - Time Series
-    image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
-    humanURL: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
-    baseURL: https://api.aveva.com
-    properties:
-      - url: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
-        type: Documentation
-    description: >-
-      AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native REST APIs for industrial
-      time-series data management, data views, event data, and secure cloud-based data sharing across operational
-      technology environments.
-  - aid: osisoft-pi:pi-af-sdk
-    name: OSIsoft PI AF SDK
-    tags:
-      - .NET
-      - Asset Framework
-      - Manufacturing
-      - SDK
-    image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
-    humanURL: https://docs.aveva.com/
-    baseURL: https://piwebapi.example.com/piwebapi
-    properties:
-      - url: https://docs.aveva.com/
-        type: Documentation
-      - url: https://github.com/aveva/sample-afsdk-getting_started-dotnet
-        type: SDKs
-    description: >-
-      OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access to the PI System asset
-      hierarchy, time-series data, and event frames from on-premises PI servers.
+- aid: osisoft-pi:aveva-connect-api
+  name: AVEVA CONNECT Data Services API
+  tags:
+  - Cloud
+  - IoT
+  - Manufacturing
+  - REST
+  - Time Series
+  image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
+  humanURL: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
+  baseURL: https://api.aveva.com
+  properties:
+  - url: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
+    type: Documentation
+  description: >-
+    AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native REST APIs for
+    industrial time-series data management, data views, event data, and secure cloud-based data sharing
+    across operational technology environments.
+- aid: osisoft-pi:pi-af-sdk
+  name: OSIsoft PI AF SDK
+  tags:
+  - .NET
+  - Asset Framework
+  - Manufacturing
+  - SDK
+  image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
+  humanURL: https://docs.aveva.com/
+  baseURL: https://piwebapi.example.com/piwebapi
+  properties:
+  - url: https://docs.aveva.com/
+    type: Documentation
+  - url: https://github.com/aveva/sample-afsdk-getting_started-dotnet
+    type: SDKs
+  description: >-
+    OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access to the PI
+    System asset hierarchy, time-series data, and event frames from on-premises PI servers.
+- aid: osisoft-pi:osisoft-pi-assetservers-api
+  name: osisoft-pi AssetServers API
+  description: Asset Framework server navigation
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - AssetServers
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-assetservers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-attributes-api
+  name: osisoft-pi Attributes API
+  description: AF attribute management
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - Attributes
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-attributes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-batchrequests-api
+  name: osisoft-pi BatchRequests API
+  description: Batch and parallel request execution
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - BatchRequests
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-batchrequests-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-dataservers-api
+  name: osisoft-pi DataServers API
+  description: PI Data Archive server management
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - DataServers
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-dataservers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-elements-api
+  name: osisoft-pi Elements API
+  description: AF element management
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - Elements
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-elements-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-eventframes-api
+  name: osisoft-pi EventFrames API
+  description: Event frame query and management
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - EventFrames
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-eventframes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-pipoints-api
+  name: osisoft-pi PIPoints API
+  description: PI point (tag) management and data
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - PIPoints
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-pipoints-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-streams-api
+  name: osisoft-pi Streams API
+  description: Time-series data streams
+  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
+  baseURL: https://piwebapi.example.com/piwebapi
+  tags:
+  - Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-streams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
 common:
   - type: AgenticAccess
     url: agentic-access/osisoft-pi-agentic-access.yml
