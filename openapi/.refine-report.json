@@ -1,0 +1,28 @@
+{
+  "provider": "osisoft-pi",
+  "sources": [
+    "osisoft-pi-assetservers-api-openapi.yml",
+    "osisoft-pi-attributes-api-openapi.yml",
+    "osisoft-pi-batchrequests-api-openapi.yml",
+    "osisoft-pi-dataservers-api-openapi.yml",
+    "osisoft-pi-elements-api-openapi.yml",
+    "osisoft-pi-eventframes-api-openapi.yml",
+    "osisoft-pi-pipoints-api-openapi.yml",
+    "osisoft-pi-streams-api-openapi.yml"
+  ],
+  "outputs": [
+    "osisoft-pi-assetservers-api-openapi.yml",
+    "osisoft-pi-attributes-api-openapi.yml",
+    "osisoft-pi-batchrequests-api-openapi.yml",
+    "osisoft-pi-dataservers-api-openapi.yml",
+    "osisoft-pi-elements-api-openapi.yml",
+    "osisoft-pi-eventframes-api-openapi.yml",
+    "osisoft-pi-pipoints-api-openapi.yml",
+    "osisoft-pi-streams-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
