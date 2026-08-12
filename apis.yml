@@ -242,7 +242,7 @@ common:
     type: GitHubOrganization
   - url: https://github.com/aveva
     type: SDKs
-  - url: openapi/osisoft-pi-web-api-openapi.yml
+  - url: openapi/_original/osisoft-pi-web-api-openapi.yml
     type: OpenAPI
   - url: json-schema/osisoft-pi-point-schema.json
     type: JSONSchema
