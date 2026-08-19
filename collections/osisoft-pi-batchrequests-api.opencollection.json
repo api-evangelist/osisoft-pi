@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OSIsoft PI Web AssetServers BatchRequests API",
+    "version": "2023.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "BatchRequests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a batch request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{piwebapi_host}/piwebapi/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes multiple PI Web API requests in a single HTTP call. Supports sequential and parallel execution with parameter substitution between requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

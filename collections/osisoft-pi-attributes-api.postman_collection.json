@@ -1,0 +1,184 @@
+{
+  "item": [
+    {
+      "id": "e4451473-a1bf-4597-b482-d3527fb24eae",
+      "name": "Attributes",
+      "description": {
+        "content": "AF attribute management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ea2dfe6b-aadf-4d3d-9b93-e3a21c52453e",
+          "name": "List element attributes",
+          "request": {
+            "name": "List element attributes",
+            "description": {
+              "content": "Returns attributes of an AF element.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "elements",
+                ":webId",
+                "attributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nameFilter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "selectedFields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webId",
+                  "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                },
+                {
+                  "description": "PI Web API server hostname",
+                  "type": "any",
+                  "value": "{{piwebapi_host}}",
+                  "key": "piwebapi_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5a3cdb81-f2f7-4fe0-be2d-ff04681804f5",
+              "name": "Attribute list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "elements",
+                    ":webId",
+                    "attributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webId",
+                      "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                    },
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"01c80b0a-ec2a-1eea-e5de-4495251bb1c7\",\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Path\": \"string\",\n      \"Type\": \"string\",\n      \"TypeQualifier\": \"string\",\n      \"DataReference\": \"string\",\n      \"ConfigString\": \"string\",\n      \"IsManualDataEntry\": true,\n      \"HasChildren\": true,\n      \"EngineeringUnits\": \"string\"\n    },\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"143d9e2c-5eb6-5466-9902-80cf0f833195\",\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Path\": \"string\",\n      \"Type\": \"string\",\n      \"TypeQualifier\": \"string\",\n      \"DataReference\": \"string\",\n      \"ConfigString\": \"string\",\n      \"IsManualDataEntry\": true,\n      \"HasChildren\": false,\n      \"EngineeringUnits\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "PI Web API server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "piwebapi.example.com",
+      "key": "piwebapi_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{piwebapi_host}}/piwebapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b58a5d3c-2446-4769-897f-aea39d3a50a8",
+    "name": "OSIsoft PI Web AssetServers Attributes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.\n\nContact Support:\n Name: AVEVA Support",
+      "type": "text/plain"
+    }
+  }
+}

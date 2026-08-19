@@ -1,0 +1,475 @@
+{
+  "item": [
+    {
+      "id": "46e3b299-9534-4aea-963d-017a2f4e32a5",
+      "name": "PIPoints",
+      "description": {
+        "content": "PI point (tag) management and data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "847ed18b-06d4-48c9-953a-b845c128c231",
+          "name": "List PI points on a server",
+          "request": {
+            "name": "List PI points on a server",
+            "description": {
+              "content": "Returns PI points (tags) on the specified PI Data Archive server with optional name filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataservers",
+                ":webId",
+                "points"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nameFilter",
+                  "value": "<string>",
+                  "description": "Wildcard filter for tag names (e.g. *.FLOW)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by point type"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxCount",
+                  "value": "1000"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "selectedFields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webId",
+                  "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                },
+                {
+                  "description": "PI Web API server hostname",
+                  "type": "any",
+                  "value": "{{piwebapi_host}}",
+                  "key": "piwebapi_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1532ba4f-7b3b-4021-83b7-678ac354f241",
+              "name": "PI point list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataservers",
+                    ":webId",
+                    "points"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxCount",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "0"
+                    },
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webId",
+                      "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                    },
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"WebId\": \"string\",\n      \"Id\": 6418,\n      \"Name\": \"string\",\n      \"Path\": \"string\",\n      \"PointType\": \"Int16\",\n      \"EngineeringUnits\": \"string\",\n      \"Description\": \"string\",\n      \"Descriptor\": \"string\",\n      \"PointClass\": \"string\",\n      \"Zero\": 6914.311625859489,\n      \"Span\": 3557.8989516628512,\n      \"Step\": true,\n      \"Future\": false\n    },\n    {\n      \"WebId\": \"string\",\n      \"Id\": 7581,\n      \"Name\": \"string\",\n      \"Path\": \"string\",\n      \"PointType\": \"Int16\",\n      \"EngineeringUnits\": \"string\",\n      \"Description\": \"string\",\n      \"Descriptor\": \"string\",\n      \"PointClass\": \"string\",\n      \"Zero\": 7995.256403290066,\n      \"Span\": 5985.122723771063,\n      \"Step\": true,\n      \"Future\": true\n    }\n  ],\n  \"Links\": {\n    \"First\": \"http://ZB.ttnZPhqeir.jV67HDpHn4uEGy+XnxKxrT0uRCarrlMs\",\n    \"Previous\": \"https://TVSTWZZOnicdGTcH.zdDq+1wcbKhYdNkelEeky0,GS1cl-\",\n    \"Next\": \"http://AOzblCEzdSFYgutIIhUBHWaulbroYA.qnyoKzshCzndq.J.KHA4Ch,G9rqaYLEJxJI3e7FnF1ec0z\",\n    \"Last\": \"https://hzf.veja.NuTtjLQbEPBKRszYpL4giV\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef9ad950-b7da-48f1-92f7-00a77f0822a3",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataservers",
+                    ":webId",
+                    "points"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxCount",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "0"
+                    },
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webId",
+                      "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                    },
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ac77c72-bb5e-4b9d-bb98-73ac51551efb",
+          "name": "Get a PI point",
+          "request": {
+            "name": "Get a PI point",
+            "description": {
+              "content": "Returns PI point configuration and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "points",
+                ":webId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "selectedFields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webId",
+                  "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                },
+                {
+                  "description": "PI Web API server hostname",
+                  "type": "any",
+                  "value": "{{piwebapi_host}}",
+                  "key": "piwebapi_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "740ed423-776e-498f-b00f-f94c4f06e23c",
+              "name": "PI point details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "points",
+                    ":webId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webId",
+                      "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                    },
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"WebId\": \"string\",\n  \"Id\": 563,\n  \"Name\": \"string\",\n  \"Path\": \"string\",\n  \"PointType\": \"Int32\",\n  \"EngineeringUnits\": \"string\",\n  \"Description\": \"string\",\n  \"Descriptor\": \"string\",\n  \"PointClass\": \"string\",\n  \"Zero\": 9824.117790341696,\n  \"Span\": 2786.5384893572477,\n  \"Step\": true,\n  \"Future\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "265648f5-d49b-4c54-8c7d-95cd21183353",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "points",
+                    ":webId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webId",
+                      "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                    },
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "PI Web API server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "piwebapi.example.com",
+      "key": "piwebapi_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{piwebapi_host}}/piwebapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fd58d1aa-35fa-41ac-8874-cbcfc406214e",
+    "name": "OSIsoft PI Web AssetServers PIPoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.\n\nContact Support:\n Name: AVEVA Support",
+      "type": "text/plain"
+    }
+  }
+}

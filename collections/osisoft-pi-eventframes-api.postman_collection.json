@@ -1,0 +1,212 @@
+{
+  "item": [
+    {
+      "id": "95405fcd-0c87-4ba6-90bf-29177473f1c9",
+      "name": "EventFrames",
+      "description": {
+        "content": "Event frame query and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "72cd1caf-0330-4809-b059-edc1564cd0d1",
+          "name": "Query event frames",
+          "request": {
+            "name": "Query event frames",
+            "description": {
+              "content": "Returns event frames matching specified criteria within a time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "eventframes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "databaseWebId",
+                  "value": "<string>",
+                  "description": "(Required) AF database WebId to search"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "*-7d"
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "*"
+                },
+                {
+                  "disabled": false,
+                  "key": "nameFilter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "templateName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxCount",
+                  "value": "1000"
+                },
+                {
+                  "disabled": false,
+                  "key": "selectedFields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "PI Web API server hostname",
+                  "type": "any",
+                  "value": "{{piwebapi_host}}",
+                  "key": "piwebapi_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "feac8fb8-7336-494d-90fe-aaaab405e6f1",
+              "name": "Event frame list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "eventframes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "databaseWebId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "*-7d"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "*"
+                    },
+                    {
+                      "key": "nameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templateName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxCount",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"0bcc9ea1-c46c-f295-8083-a72d04a3058e\",\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"TemplateName\": \"string\",\n      \"StartTime\": \"1981-07-09T01:13:08.378Z\",\n      \"EndTime\": \"2020-07-22T05:38:50.257Z\",\n      \"AcknowledgedBy\": \"string\",\n      \"AcknowledgedDate\": \"2009-09-02T18:33:50.116Z\",\n      \"CanBeAcknowledged\": true,\n      \"IsAcknowledged\": false,\n      \"IsAnnotated\": false,\n      \"Severity\": \"Information\"\n    },\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"3f28dffc-b881-cf03-924b-62eb7a201791\",\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"TemplateName\": \"string\",\n      \"StartTime\": \"1974-09-09T15:35:36.851Z\",\n      \"EndTime\": \"1972-07-28T06:54:46.992Z\",\n      \"AcknowledgedBy\": \"string\",\n      \"AcknowledgedDate\": \"2005-01-22T00:07:43.110Z\",\n      \"CanBeAcknowledged\": true,\n      \"IsAcknowledged\": false,\n      \"IsAnnotated\": false,\n      \"Severity\": \"Major\"\n    }\n  ],\n  \"Links\": {\n    \"First\": \"https://ejPsJEXpIAUxW.ksosUMPhh,go4p7bXGBRvt+d0xekYdU3saSMwkW.EiIcvJaQIX\",\n    \"Previous\": \"https://jkkFJawMzxfXxR.yqfgJfopqQ\",\n    \"Next\": \"http://J.nqlzxNGomerFD4AP7mTic8LNrAMU\",\n    \"Last\": \"https://oHd.lcksRw5ghp5acQKibdK+QhgKa,a1DMDvzbFzkKR7\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "PI Web API server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "piwebapi.example.com",
+      "key": "piwebapi_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{piwebapi_host}}/piwebapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "743c5991-b44f-4560-ad10-e46bfdedbdec",
+    "name": "OSIsoft PI Web AssetServers EventFrames API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.\n\nContact Support:\n Name: AVEVA Support",
+      "type": "text/plain"
+    }
+  }
+}

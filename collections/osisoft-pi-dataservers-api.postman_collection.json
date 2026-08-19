@@ -1,0 +1,213 @@
+{
+  "item": [
+    {
+      "id": "46f3f07c-0f66-4f5d-8992-5df301d74ee9",
+      "name": "DataServers",
+      "description": {
+        "content": "PI Data Archive server management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "54e82703-27ae-48a9-81fe-50920d5b2fbb",
+          "name": "List PI Data Archive servers",
+          "request": {
+            "name": "List PI Data Archive servers",
+            "description": {
+              "content": "Returns all registered PI Data Archive servers accessible via this PI Web API instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataservers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "selectedFields",
+                  "value": "<string>",
+                  "description": "Comma-separated list of fields to return"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "PI Web API server hostname",
+                  "type": "any",
+                  "value": "{{piwebapi_host}}",
+                  "key": "piwebapi_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f04fcb62-9932-47bd-b139-171d93e758bd",
+              "name": "List of data servers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"32433e93-cd10-e8d2-c431-bac997676d73\",\n      \"Name\": \"string\",\n      \"Path\": \"string\",\n      \"IsConnected\": false,\n      \"ServerVersion\": \"string\",\n      \"ServerTime\": \"2000-04-17T22:25:59.804Z\",\n      \"Links\": {}\n    },\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"3f9ece7a-8e2a-45d5-3cbd-4087a79b7b1f\",\n      \"Name\": \"string\",\n      \"Path\": \"string\",\n      \"IsConnected\": false,\n      \"ServerVersion\": \"string\",\n      \"ServerTime\": \"2001-09-18T01:16:04.170Z\",\n      \"Links\": {}\n    }\n  ],\n  \"Links\": {\n    \"First\": \"https://jUSFzcEQkV.wghmwTkmx24BOA3n.\",\n    \"Previous\": \"https://NpVdeYyggLaXQe.znm8LV\",\n    \"Next\": \"http://rCJIPUdlUBTiKLcpbgnbqRYP.imtWQaTrO5m4,\",\n    \"Last\": \"http://xYCzfycheiDEBCcjICk.awzRY+smsNg8NhqmwsKOOa1,VWY9.-fKj6ZwW+W0ZHsBn84UcVgn887Iv3HFa599w,RGx\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ee51115-2fca-4a09-830e-3dc2174d3d9f",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Errors\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "PI Web API server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "piwebapi.example.com",
+      "key": "piwebapi_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{piwebapi_host}}/piwebapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1fbbfdb8-3f88-4928-bdcb-21d08643a177",
+    "name": "OSIsoft PI Web AssetServers DataServers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.\n\nContact Support:\n Name: AVEVA Support",
+      "type": "text/plain"
+    }
+  }
+}

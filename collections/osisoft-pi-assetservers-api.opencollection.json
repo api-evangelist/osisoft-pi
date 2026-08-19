@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OSIsoft PI Web AssetServers API",
+    "version": "2023.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AssetServers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Asset Framework servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/assetservers"
+          },
+          "docs": "Returns all registered PI Asset Framework (AF) servers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

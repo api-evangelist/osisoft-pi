@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OSIsoft PI Web AssetServers Streams API",
+    "version": "2023.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Streams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current stream value",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/streams/:webId/value",
+            "params": [
+              {
+                "name": "webId",
+                "value": "",
+                "type": "path",
+                "description": "PI Web API WebId (unique opaque identifier for PI System objects)"
+              },
+              {
+                "name": "desiredUnits",
+                "value": "",
+                "type": "query",
+                "description": "Unit of measure for the returned value"
+              },
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the current (snapshot) value for a PI point or AF attribute stream."
+        },
+        {
+          "info": {
+            "name": "Get recorded stream values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/streams/:webId/recorded",
+            "params": [
+              {
+                "name": "webId",
+                "value": "",
+                "type": "path",
+                "description": "PI Web API WebId (unique opaque identifier for PI System objects)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start time (absolute or relative, e.g. \"*-1d\" or \"2026-03-01T00:00:00Z\")"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End time"
+              },
+              {
+                "name": "boundaryType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "desiredUnits",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns archive (recorded) values for a PI point or AF attribute within a time range."
+        },
+        {
+          "info": {
+            "name": "Get interpolated stream values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/streams/:webId/interpolated",
+            "params": [
+              {
+                "name": "webId",
+                "value": "",
+                "type": "path",
+                "description": "PI Web API WebId (unique opaque identifier for PI System objects)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Interval between values (e.g. \"1h\", \"5m\")"
+              },
+              {
+                "name": "desiredUnits",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns interpolated values at a fixed time interval within a time range."
+        },
+        {
+          "info": {
+            "name": "Get stream summary statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/streams/:webId/summary",
+            "params": [
+              {
+                "name": "webId",
+                "value": "",
+                "type": "path",
+                "description": "PI Web API WebId (unique opaque identifier for PI System objects)"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "summaryType",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated summary types"
+              },
+              {
+                "name": "calculationBasis",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns statistical summaries (min, max, average, count, etc.) for a stream over a time range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

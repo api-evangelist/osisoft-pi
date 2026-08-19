@@ -1,0 +1,146 @@
+{
+  "item": [
+    {
+      "id": "4aa95274-22b6-4e79-af60-1c1b5519d3bd",
+      "name": "AssetServers",
+      "description": {
+        "content": "Asset Framework server navigation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "62dc984e-cf9b-410d-9a92-10d5f14c7e17",
+          "name": "List Asset Framework servers",
+          "request": {
+            "name": "List Asset Framework servers",
+            "description": {
+              "content": "Returns all registered PI Asset Framework (AF) servers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assetservers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "PI Web API server hostname",
+                  "type": "any",
+                  "value": "{{piwebapi_host}}",
+                  "key": "piwebapi_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "add22603-5dbf-46e8-bf33-5a5934230551",
+              "name": "Asset server list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assetservers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"3feb87b9-f48e-0427-708c-bba798c65c12\",\n      \"Name\": \"string\",\n      \"Path\": \"string\",\n      \"IsConnected\": false,\n      \"ServerVersion\": \"string\"\n    },\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"f78fd984-c015-df13-94ad-a1356eac7f0d\",\n      \"Name\": \"string\",\n      \"Path\": \"string\",\n      \"IsConnected\": true,\n      \"ServerVersion\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "PI Web API server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "piwebapi.example.com",
+      "key": "piwebapi_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{piwebapi_host}}/piwebapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "747701ad-d946-4201-a8a0-98fffb7c1fb7",
+    "name": "OSIsoft PI Web AssetServers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.\n\nContact Support:\n Name: AVEVA Support",
+      "type": "text/plain"
+    }
+  }
+}

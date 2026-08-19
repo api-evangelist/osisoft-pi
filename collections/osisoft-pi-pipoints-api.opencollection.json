@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OSIsoft PI Web AssetServers PIPoints API",
+    "version": "2023.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PIPoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List PI points on a server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/dataservers/:webId/points",
+            "params": [
+              {
+                "name": "webId",
+                "value": "",
+                "type": "path",
+                "description": "PI Web API WebId (unique opaque identifier for PI System objects)"
+              },
+              {
+                "name": "nameFilter",
+                "value": "",
+                "type": "query",
+                "description": "Wildcard filter for tag names (e.g. *.FLOW)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by point type"
+              },
+              {
+                "name": "maxCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns PI points (tags) on the specified PI Data Archive server with optional name filtering."
+        },
+        {
+          "info": {
+            "name": "Get a PI point",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/points/:webId",
+            "params": [
+              {
+                "name": "webId",
+                "value": "",
+                "type": "path",
+                "description": "PI Web API WebId (unique opaque identifier for PI System objects)"
+              },
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns PI point configuration and metadata."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

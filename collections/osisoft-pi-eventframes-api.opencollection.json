@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OSIsoft PI Web AssetServers EventFrames API",
+    "version": "2023.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EventFrames",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Query event frames",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/eventframes",
+            "params": [
+              {
+                "name": "databaseWebId",
+                "value": "",
+                "type": "query",
+                "description": "AF database WebId to search"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "nameFilter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "templateName",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxCount",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns event frames matching specified criteria within a time range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

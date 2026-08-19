@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OSIsoft PI Web AssetServers DataServers API",
+    "version": "2023.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataServers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List PI Data Archive servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/dataservers",
+            "params": [
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of fields to return"
+              }
+            ]
+          },
+          "docs": "Returns all registered PI Data Archive servers accessible via this PI Web API instance."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

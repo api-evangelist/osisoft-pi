@@ -1,0 +1,202 @@
+{
+  "item": [
+    {
+      "id": "9306b5c7-ded0-4292-9da5-03b7196c66db",
+      "name": "Elements",
+      "description": {
+        "content": "AF element management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "78e91a86-8ce7-4623-8745-ae5ec2f6eaaa",
+          "name": "List AF elements",
+          "request": {
+            "name": "List AF elements",
+            "description": {
+              "content": "Returns top-level AF elements in an asset database.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "assetdatabases",
+                ":webId",
+                "elements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "nameFilter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "templateName",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxCount",
+                  "value": "1000"
+                },
+                {
+                  "disabled": false,
+                  "key": "selectedFields",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "webId",
+                  "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                },
+                {
+                  "description": "PI Web API server hostname",
+                  "type": "any",
+                  "value": "{{piwebapi_host}}",
+                  "key": "piwebapi_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ba20135-b1bb-496a-a195-6bd355d4b675",
+              "name": "Element list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "assetdatabases",
+                    ":webId",
+                    "elements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "nameFilter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "templateName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxCount",
+                      "value": "1000"
+                    },
+                    {
+                      "key": "selectedFields",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "webId",
+                      "description": "(Required) PI Web API WebId (unique opaque identifier for PI System objects)"
+                    },
+                    {
+                      "description": "PI Web API server hostname",
+                      "type": "any",
+                      "value": "{{piwebapi_host}}",
+                      "key": "piwebapi_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Items\": [\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"b67e2db8-c287-6bac-575b-506b8f2b966c\",\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Path\": \"string\",\n      \"TemplateName\": \"string\",\n      \"HasChildren\": false,\n      \"CategoryNames\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"WebId\": \"string\",\n      \"Id\": \"47e667c3-f95c-a660-e11e-cd1893f68ed6\",\n      \"Name\": \"string\",\n      \"Description\": \"string\",\n      \"Path\": \"string\",\n      \"TemplateName\": \"string\",\n      \"HasChildren\": true,\n      \"CategoryNames\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"Links\": {\n    \"First\": \"http://XbdEaEgBf.rrRiCkV0fJEZBSplWLnY,nC\",\n    \"Previous\": \"https://R.ccpth5E0xUSSeBvpBj8WigiS-ngxS+E\",\n    \"Next\": \"https://VAlsefhAxiJFipJrIIfhPnFisdm.tlfmdI,ygd,U7UR6uxKJ.7ViHUO0v8+eUwEfa,csKdareX\",\n    \"Last\": \"https://emdoaqsyoyDZsiCdPKObFAU.eivyNoRnX,YFBsfWvoZEbK2PewABTdrC,xxRRpu+7.b07eR8zoLxCr+n5qjeoR4,,kGI9ZNzi\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "PI Web API server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "piwebapi.example.com",
+      "key": "piwebapi_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{piwebapi_host}}/piwebapi",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a2b43173-a1c4-4026-911e-a64a2458c007",
+    "name": "OSIsoft PI Web AssetServers Elements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.\n\nContact Support:\n Name: AVEVA Support",
+      "type": "text/plain"
+    }
+  }
+}

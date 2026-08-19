@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "OSIsoft PI Web AssetServers Attributes API",
+    "version": "2023.2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attributes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List element attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{piwebapi_host}/piwebapi/elements/:webId/attributes",
+            "params": [
+              {
+                "name": "webId",
+                "value": "",
+                "type": "path",
+                "description": "PI Web API WebId (unique opaque identifier for PI System objects)"
+              },
+              {
+                "name": "nameFilter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "selectedFields",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns attributes of an AF element."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
