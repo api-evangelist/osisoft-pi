@@ -98,6 +98,8 @@ apis:
   humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
   baseURL: https://piwebapi.example.com/piwebapi
   tags:
+  - Batch Requests
+  tags_raw:
   - BatchRequests
   properties:
   - type: OpenAPI
