@@ -36,7 +36,6 @@ apis:
   - Manufacturing
   - REST
   - Time Series
-  image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
   humanURL: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
   baseURL: https://api.aveva.com
   properties:
@@ -53,7 +52,6 @@ apis:
   - Asset Framework
   - Manufacturing
   - SDK
-  image: https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/image.png
   humanURL: https://docs.aveva.com/
   baseURL: https://piwebapi.example.com/piwebapi
   properties:
@@ -110,7 +108,7 @@ apis:
   humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
   baseURL: https://piwebapi.example.com/piwebapi
   tags:
-  - Batch Requests
+  - BatchRequests
   tags_raw:
   - BatchRequests
   properties:
