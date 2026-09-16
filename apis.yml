@@ -1,5 +1,5 @@
 aid: osisoft-pi
-name: "OSIsoft PI System"
+name: OSIsoft PI System
 deliveryModel:
   model: library
   open_source: false
@@ -42,10 +42,9 @@ apis:
   properties:
   - url: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
     type: Documentation
-  description: >-
-    AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native REST APIs for
-    industrial time-series data management, data views, event data, and secure cloud-based data sharing
-    across operational technology environments.
+  description: AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native
+    REST APIs for industrial time-series data management, data views, event data, and secure cloud-based
+    data sharing across operational technology environments.
 - aid: osisoft-pi:pi-af-sdk
   name: OSIsoft PI AF SDK
   tags:
@@ -60,9 +59,8 @@ apis:
     type: Documentation
   - url: https://github.com/aveva/sample-afsdk-getting_started-dotnet
     type: SDKs
-  description: >-
-    OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access to the PI
-    System asset hierarchy, time-series data, and event frames from on-premises PI servers.
+  description: OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access
+    to the PI System asset hierarchy, time-series data, and event frames from on-premises PI servers.
 - aid: osisoft-pi:osisoft-pi-assetservers-api
   name: osisoft-pi AssetServers API
   description: Asset Framework server navigation
@@ -226,48 +224,52 @@ apis:
   - type: SDKs
     url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
 common:
-  - type: AgenticAccess
-    url: agentic-access/osisoft-pi-agentic-access.yml
-  - type: TrustCenter
-    url: security/osisoft-pi-trust-center.yml
-  - type: VulnerabilityDisclosure
-    url: security/osisoft-pi-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/osisoft-pi-domain-security.yml
-  - type: Authentication
-    url: authentication/osisoft-pi-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/osisoft
-  - url: https://docs.aveva.com/
-    type: Portal
-  - url: https://docs.aveva.com/
-    type: Documentation
-  - url: https://docs.aveva.com/bundle/pi-web-api-getting-started
-    type: GettingStarted
-  - url: https://www.aveva.com/
-    type: Website
-  - url: https://softwaresupport.aveva.com/
-    type: Support
-  - url: https://community.aveva.com/
-    type: Support
-  - url: https://learningacademy.aveva.com/
-    type: Documentation
-  - url: https://github.com/aveva
-    type: GitHubOrganization
-  - url: https://github.com/aveva
-    type: SDKs
-  - url: openapi/_original/osisoft-pi-web-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/osisoft-pi-point-schema.json
-    type: JSONSchema
-  - url: json-schema/osisoft-pi-timed-value-schema.json
-    type: JSONSchema
-  - url: json-ld/osisoft-pi-context.jsonld
-    type: JSONLDContext
+- type: AgenticAccess
+  url: agentic-access/osisoft-pi-agentic-access.yml
+- type: TrustCenter
+  url: security/osisoft-pi-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/osisoft-pi-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/osisoft-pi-domain-security.yml
+- type: Authentication
+  url: authentication/osisoft-pi-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/osisoft
+- url: https://docs.aveva.com/
+  type: Portal
+- url: https://docs.aveva.com/
+  type: Documentation
+- url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  type: GettingStarted
+- url: https://www.aveva.com/
+  type: Website
+- url: https://softwaresupport.aveva.com/
+  type: Support
+- url: https://community.aveva.com/
+  type: Support
+- url: https://learningacademy.aveva.com/
+  type: Documentation
+- url: https://github.com/aveva
+  type: GitHubOrganization
+- url: https://github.com/aveva
+  type: SDKs
+- url: openapi/_original/osisoft-pi-web-api-openapi.yml
+  type: OpenAPI
+- url: json-schema/osisoft-pi-point-schema.json
+  type: JSONSchema
+- url: json-schema/osisoft-pi-timed-value-schema.json
+  type: JSONSchema
+- url: json-ld/osisoft-pi-context.jsonld
+  type: JSONLDContext
 maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
-modified: '2026-05-19'
-description: >-
-  OSIsoft PI System is a real-time data management platform used by industrial organizations to capture, analyze, and
-  visualize operational data from sensors, devices, and applications.
+- name: Kin Lane
+  email: kin@apievangelist.com
+modified: '2026-09-16'
+description: OSIsoft PI System is a real-time data management platform used by industrial organizations
+  to capture, analyze, and visualize operational data from sensors, devices, and applications.
+tags:
+- Manufacturing
+- Cloud
+- IoT
+- Time Series
