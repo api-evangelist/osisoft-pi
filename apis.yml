@@ -42,9 +42,10 @@ apis:
   properties:
   - url: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
     type: Documentation
-  description: AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native
-    REST APIs for industrial time-series data management, data views, event data, and secure cloud-based
-    data sharing across operational technology environments.
+  description: >-
+    AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native REST APIs for
+    industrial time-series data management, data views, event data, and secure cloud-based data sharing
+    across operational technology environments.
 - aid: osisoft-pi:pi-af-sdk
   name: OSIsoft PI AF SDK
   tags:
@@ -59,8 +60,9 @@ apis:
     type: Documentation
   - url: https://github.com/aveva/sample-afsdk-getting_started-dotnet
     type: SDKs
-  description: OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access
-    to the PI System asset hierarchy, time-series data, and event frames from on-premises PI servers.
+  description: >-
+    OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access to the PI
+    System asset hierarchy, time-series data, and event frames from on-premises PI servers.
 - aid: osisoft-pi:osisoft-pi-assetservers-api
   name: osisoft-pi AssetServers API
   description: Asset Framework server navigation
@@ -91,28 +93,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/osisoft-pi-attributes-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aveva.com/bundle/pi-web-api-reference
-  - type: Reference
-    url: https://docs.aveva.com/bundle/pi-web-api-reference
-  - type: GettingStarted
-    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
-  - type: SDKs
-    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
-  - type: SDKs
-    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
-- aid: osisoft-pi:osisoft-pi-batchrequests-api
-  name: osisoft-pi BatchRequests API
-  description: Batch and parallel request execution
-  humanURL: https://docs.aveva.com/bundle/pi-web-api-reference
-  baseURL: https://piwebapi.example.com/piwebapi
-  tags:
-  - Batch Requests
-  tags_raw:
-  - BatchRequests
-  properties:
-  - type: OpenAPI
-    url: openapi/osisoft-pi-batchrequests-api-openapi.yml
   - type: Documentation
     url: https://docs.aveva.com/bundle/pi-web-api-reference
   - type: Reference
@@ -213,6 +193,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/osisoft-pi-streams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: Reference
+    url: https://docs.aveva.com/bundle/pi-web-api-reference
+  - type: GettingStarted
+    url: https://docs.aveva.com/bundle/pi-web-api-getting-started
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-python
+  - type: SDKs
+    url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
+- aid: osisoft-pi:osisoft-pi-batch-requests-api
+  name: OSIsoft PI System Batch Requests API
+  description: Batch and parallel request execution
+  humanURL: https://docs.aveva.com/bundle/aveva-data-hub-api-reference
+  baseURL: https://api.aveva.com
+  tags:
+  - Batch Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/osisoft-pi-batch-requests-api-openapi.yml
   - type: Documentation
     url: https://docs.aveva.com/bundle/pi-web-api-reference
   - type: Reference
