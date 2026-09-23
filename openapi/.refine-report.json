@@ -1,14 +1,7 @@
 {
   "provider": "osisoft-pi",
   "sources": [
-    "osisoft-pi-assetservers-api-openapi.yml",
-    "osisoft-pi-attributes-api-openapi.yml",
-    "osisoft-pi-batchrequests-api-openapi.yml",
-    "osisoft-pi-dataservers-api-openapi.yml",
-    "osisoft-pi-elements-api-openapi.yml",
-    "osisoft-pi-eventframes-api-openapi.yml",
-    "osisoft-pi-pipoints-api-openapi.yml",
-    "osisoft-pi-streams-api-openapi.yml"
+    "_original/osisoft-pi-web-api-openapi.yml"
   ],
   "outputs": [
     "osisoft-pi-assetservers-api-openapi.yml",
@@ -20,9 +13,25 @@
     "osisoft-pi-pipoints-api-openapi.yml",
     "osisoft-pi-streams-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "osisoft-pi-web-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: osisoft-pi-batch-requests-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 10 total)"
+  ],
+  "skipped": [
+    "osisoft-pi-assetservers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "osisoft-pi-attributes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "osisoft-pi-batch-requests-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "osisoft-pi-dataservers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "osisoft-pi-elements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "osisoft-pi-eventframes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "osisoft-pi-pipoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "osisoft-pi-streams-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

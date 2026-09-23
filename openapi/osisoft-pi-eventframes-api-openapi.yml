@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: OSIsoft PI Web AssetServers EventFrames API
+  title: OSIsoft PI Web Event Frames API
   description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
   version: 2023.2.0
   contact:
@@ -80,6 +80,23 @@ paths:
                     $ref: '#/components/schemas/PaginationLinks'
 components:
   schemas:
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
     EventFrame:
       type: object
       description: A PI AF event frame
@@ -124,23 +141,6 @@ components:
           - Minor
           - Major
           - Critical
-    PaginationLinks:
-      type: object
-      properties:
-        First:
-          type: string
-          format: uri
-        Previous:
-          type: string
-          format: uri
-          nullable: true
-        Next:
-          type: string
-          format: uri
-          nullable: true
-        Last:
-          type: string
-          format: uri
   securitySchemes:
     basicAuth:
       type: http

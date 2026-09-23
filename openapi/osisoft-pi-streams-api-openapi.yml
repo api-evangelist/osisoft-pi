@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: OSIsoft PI Web AssetServers Streams API
+  title: OSIsoft PI Web Streams API
   description: OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
   version: 2023.2.0
   contact:
@@ -213,22 +213,6 @@ components:
           type: array
           items:
             type: string
-    StreamSummary:
-      type: object
-      properties:
-        Type:
-          type: string
-          enum:
-          - Minimum
-          - Maximum
-          - Average
-          - StdDev
-          - Total
-          - Count
-          - Range
-          - PercentGood
-        Value:
-          $ref: '#/components/schemas/TimedValue'
     PaginationLinks:
       type: object
       properties:
@@ -275,13 +259,22 @@ components:
           type: boolean
         UnitsAbbreviation:
           type: string
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    StreamSummary:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Minimum
+          - Maximum
+          - Average
+          - StdDev
+          - Total
+          - Count
+          - Range
+          - PercentGood
+        Value:
+          $ref: '#/components/schemas/TimedValue'
   parameters:
     WebId:
       name: webId
@@ -290,6 +283,13 @@ components:
       description: PI Web API WebId (unique opaque identifier for PI System objects)
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
