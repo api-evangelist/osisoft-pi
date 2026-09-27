@@ -64,32 +64,7 @@ paths:
                   Links:
                     $ref: '#/components/schemas/PaginationLinks'
 components:
-  parameters:
-    WebId:
-      name: webId
-      in: path
-      required: true
-      description: PI Web API WebId (unique opaque identifier for PI System objects)
-      schema:
-        type: string
   schemas:
-    PaginationLinks:
-      type: object
-      properties:
-        First:
-          type: string
-          format: uri
-        Previous:
-          type: string
-          format: uri
-          nullable: true
-        Next:
-          type: string
-          format: uri
-          nullable: true
-        Last:
-          type: string
-          format: uri
     Element:
       type: object
       description: A PI AF element
@@ -113,6 +88,31 @@ components:
           type: array
           items:
             type: string
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
