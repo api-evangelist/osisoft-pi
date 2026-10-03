@@ -105,13 +105,14 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
   schemas:
     PIPoint:
       type: object
@@ -181,14 +182,13 @@ components:
           type: array
           items:
             type: string
-  parameters:
-    WebId:
-      name: webId
-      in: path
-      required: true
-      description: PI Web API WebId (unique opaque identifier for PI System objects)
-      schema:
-        type: string
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http

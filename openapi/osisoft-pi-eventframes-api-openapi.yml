@@ -80,6 +80,23 @@ paths:
                     $ref: '#/components/schemas/PaginationLinks'
 components:
   schemas:
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
     EventFrame:
       type: object
       description: A PI AF event frame
@@ -124,23 +141,6 @@ components:
           - Minor
           - Major
           - Critical
-    PaginationLinks:
-      type: object
-      properties:
-        First:
-          type: string
-          format: uri
-        Previous:
-          type: string
-          format: uri
-          nullable: true
-        Next:
-          type: string
-          format: uri
-          nullable: true
-        Last:
-          type: string
-          format: uri
   securitySchemes:
     basicAuth:
       type: http

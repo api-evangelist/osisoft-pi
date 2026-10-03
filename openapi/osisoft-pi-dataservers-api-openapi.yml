@@ -54,28 +54,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    DataServer:
-      type: object
-      properties:
-        WebId:
-          type: string
-        Id:
-          type: string
-          format: uuid
-        Name:
-          type: string
-        Path:
-          type: string
-          description: PI path (\\ServerName)
-        IsConnected:
-          type: boolean
-        ServerVersion:
-          type: string
-        ServerTime:
-          type: string
-          format: date-time
-        Links:
-          type: object
     PaginationLinks:
       type: object
       properties:
@@ -100,6 +78,28 @@ components:
           type: array
           items:
             type: string
+    DataServer:
+      type: object
+      properties:
+        WebId:
+          type: string
+        Id:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Path:
+          type: string
+          description: PI path (\\ServerName)
+        IsConnected:
+          type: boolean
+        ServerVersion:
+          type: string
+        ServerTime:
+          type: string
+          format: date-time
+        Links:
+          type: object
   responses:
     Unauthorized:
       description: Authentication required

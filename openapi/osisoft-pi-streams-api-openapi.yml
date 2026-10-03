@@ -205,54 +205,15 @@ paths:
                     items:
                       $ref: '#/components/schemas/StreamSummary'
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
   schemas:
-    StreamSummary:
-      type: object
-      properties:
-        Type:
-          type: string
-          enum:
-          - Minimum
-          - Maximum
-          - Average
-          - StdDev
-          - Total
-          - Count
-          - Range
-          - PercentGood
-        Value:
-          $ref: '#/components/schemas/TimedValue'
-    Error:
-      type: object
-      properties:
-        Errors:
-          type: array
-          items:
-            type: string
-    PaginationLinks:
-      type: object
-      properties:
-        First:
-          type: string
-          format: uri
-        Previous:
-          type: string
-          format: uri
-          nullable: true
-        Next:
-          type: string
-          format: uri
-          nullable: true
-        Last:
-          type: string
-          format: uri
     TimedValue:
       type: object
       description: A PI time-series value with timestamp
@@ -282,14 +243,53 @@ components:
           type: boolean
         UnitsAbbreviation:
           type: string
-  parameters:
-    WebId:
-      name: webId
-      in: path
-      required: true
-      description: PI Web API WebId (unique opaque identifier for PI System objects)
-      schema:
-        type: string
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
+    Error:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            type: string
+    StreamSummary:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Minimum
+          - Maximum
+          - Average
+          - StdDev
+          - Total
+          - Count
+          - Range
+          - PercentGood
+        Value:
+          $ref: '#/components/schemas/TimedValue'
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     basicAuth:
       type: http
