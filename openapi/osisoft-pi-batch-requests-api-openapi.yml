@@ -49,17 +49,6 @@ paths:
                   $ref: '#/components/schemas/BatchResponse'
 components:
   schemas:
-    BatchResponse:
-      type: object
-      properties:
-        Status:
-          type: integer
-        Headers:
-          type: object
-          additionalProperties:
-            type: string
-        Content:
-          type: object
     BatchRequest:
       type: object
       properties:
@@ -88,6 +77,17 @@ components:
           type: object
           additionalProperties:
             type: string
+    BatchResponse:
+      type: object
+      properties:
+        Status:
+          type: integer
+        Headers:
+          type: object
+          additionalProperties:
+            type: string
+        Content:
+          type: object
   securitySchemes:
     basicAuth:
       type: http

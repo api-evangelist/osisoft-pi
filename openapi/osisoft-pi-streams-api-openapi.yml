@@ -214,6 +214,22 @@ components:
       schema:
         type: string
   schemas:
+    StreamSummary:
+      type: object
+      properties:
+        Type:
+          type: string
+          enum:
+          - Minimum
+          - Maximum
+          - Average
+          - StdDev
+          - Total
+          - Count
+          - Range
+          - PercentGood
+        Value:
+          $ref: '#/components/schemas/TimedValue'
     TimedValue:
       type: object
       description: A PI time-series value with timestamp
@@ -243,6 +259,13 @@ components:
           type: boolean
         UnitsAbbreviation:
           type: string
+    Error:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            type: string
     PaginationLinks:
       type: object
       properties:
@@ -260,29 +283,6 @@ components:
         Last:
           type: string
           format: uri
-    Error:
-      type: object
-      properties:
-        Errors:
-          type: array
-          items:
-            type: string
-    StreamSummary:
-      type: object
-      properties:
-        Type:
-          type: string
-          enum:
-          - Minimum
-          - Maximum
-          - Average
-          - StdDev
-          - Total
-          - Count
-          - Range
-          - PercentGood
-        Value:
-          $ref: '#/components/schemas/TimedValue'
   responses:
     NotFound:
       description: Resource not found
