@@ -224,6 +224,8 @@ apis:
   - type: SDKs
     url: https://github.com/aveva/sample-pi_web_api-common_actions-angular
 common:
+- url: https://www.aveva.com/en/solutions/engineering/
+  type: Blog
 - type: AgenticAccess
   url: agentic-access/osisoft-pi-agentic-access.yml
 - type: TrustCenter
@@ -265,7 +267,7 @@ common:
 maintainers:
 - name: Kin Lane
   email: kin@apievangelist.com
-modified: '2026-09-16'
+modified: '2026-10-06'
 description: OSIsoft PI System is a real-time data management platform used by industrial organizations
   to capture, analyze, and visualize operational data from sensors, devices, and applications.
 tags:
