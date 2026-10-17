@@ -205,14 +205,6 @@ paths:
                     items:
                       $ref: '#/components/schemas/StreamSummary'
 components:
-  parameters:
-    WebId:
-      name: webId
-      in: path
-      required: true
-      description: PI Web API WebId (unique opaque identifier for PI System objects)
-      schema:
-        type: string
   schemas:
     StreamSummary:
       type: object
@@ -290,6 +282,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http

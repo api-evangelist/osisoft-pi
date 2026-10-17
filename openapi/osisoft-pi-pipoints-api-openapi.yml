@@ -105,39 +105,7 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    WebId:
-      name: webId
-      in: path
-      required: true
-      description: PI Web API WebId (unique opaque identifier for PI System objects)
-      schema:
-        type: string
   schemas:
-    Error:
-      type: object
-      properties:
-        Errors:
-          type: array
-          items:
-            type: string
-    PaginationLinks:
-      type: object
-      properties:
-        First:
-          type: string
-          format: uri
-        Previous:
-          type: string
-          format: uri
-          nullable: true
-        Next:
-          type: string
-          format: uri
-          nullable: true
-        Last:
-          type: string
-          format: uri
     PIPoint:
       type: object
       description: A PI point (tag) definition
@@ -182,6 +150,30 @@ components:
           description: True if values change as step function
         Future:
           type: boolean
+    Error:
+      type: object
+      properties:
+        Errors:
+          type: array
+          items:
+            type: string
+    PaginationLinks:
+      type: object
+      properties:
+        First:
+          type: string
+          format: uri
+        Previous:
+          type: string
+          format: uri
+          nullable: true
+        Next:
+          type: string
+          format: uri
+          nullable: true
+        Last:
+          type: string
+          format: uri
   responses:
     NotFound:
       description: Resource not found
@@ -189,6 +181,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    WebId:
+      name: webId
+      in: path
+      required: true
+      description: PI Web API WebId (unique opaque identifier for PI System objects)
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
