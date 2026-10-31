@@ -1,4 +1,4 @@
-# osisoft-pi (osisoft-pi)
+# OSIsoft PI System
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,100 +66,155 @@
 
 OSIsoft PI System is a real-time data management platform used by industrial organizations to capture, analyze, and visualize operational data from sensors, devices, and applications.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/osisoft-pi/refs/heads/main/apis.yml)
+**Areas:** Manufacturing · Cloud · IoT · Time Series
 
-## Timestamps
+## OSIsoft PI System on APIs.io
 
-- **Modified:** 2026-05-19
+Everything profiled for OSIsoft PI System is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/osisoft-pi/](https://apis.io/providers/osisoft-pi/)** — or go straight to one of the APIs or properties below.
 
-## APIs
+### APIs (10)
 
-### OSIsoft PI Web API
+- [AVEVA CONNECT Data Services API](https://apis.io/apis/osisoft-pi/aveva-connect-api/) — AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native REST APIs for industrial time-series data management, data views,…
+- [OSIsoft PI AF SDK](https://apis.io/apis/osisoft-pi/pi-af-sdk/) — OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access to the PI System asset hierarchy, time-series data, and event…
+- [osisoft-pi AssetServers API](https://apis.io/apis/osisoft-pi/osisoft-pi-assetservers-api/) — Asset Framework server navigation
+- [osisoft-pi Attributes API](https://apis.io/apis/osisoft-pi/osisoft-pi-attributes-api/) — AF attribute management
+- [osisoft-pi DataServers API](https://apis.io/apis/osisoft-pi/osisoft-pi-dataservers-api/) — PI Data Archive server management
+- [osisoft-pi Elements API](https://apis.io/apis/osisoft-pi/osisoft-pi-elements-api/) — AF element management
+- [osisoft-pi EventFrames API](https://apis.io/apis/osisoft-pi/osisoft-pi-eventframes-api/) — Event frame query and management
+- [osisoft-pi PIPoints API](https://apis.io/apis/osisoft-pi/osisoft-pi-pipoints-api/) — PI point (tag) management and data
+- [osisoft-pi Streams API](https://apis.io/apis/osisoft-pi/osisoft-pi-streams-api/) — Time-series data streams
+- [OSIsoft PI System Batch Requests API](https://apis.io/apis/osisoft-pi/osisoft-pi-batch-requests-api/) — Batch and parallel request execution
 
-OSIsoft PI Web API (now part of AVEVA) provides a REST interface for accessing the PI System process historian. APIs enable real-time and historical time-series data retrieval, event frame queries, asset framework hierarchy navigation, and calculated data for industrial process monitoring.
+### Published properties
 
-- **Human URL:** [https://docs.aveva.com/bundle/pi-web-api-reference](https://docs.aveva.com/bundle/pi-web-api-reference)
-- **Base URL:** `https://piwebapi.example.com/piwebapi`
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-#### Tags
+#### Agentic access (1)
 
-- Energy
-- Manufacturing
-- Process Historian
-- REST
-- SCADA
-- Time Series
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Osisoft Pi Agentic Access](https://apis.io/agentic-access/osisoft-pi/osisoft-pi-agentic-access/)
 
-- [Documentation](https://docs.aveva.com/bundle/pi-web-api-reference)
-- [Reference](https://docs.aveva.com/bundle/pi-web-api-reference)
-- [Getting Started](https://docs.aveva.com/bundle/pi-web-api-getting-started)
-- [S D Ks](https://github.com/aveva/sample-pi_web_api-common_actions-python)
-- [S D Ks](https://github.com/aveva/sample-pi_web_api-common_actions-angular)
-- [OpenAPI](openapi/osisoft-pi-web-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/osisoft-pi-web-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/osisoft-pi-web-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### JSON Schema (2)
 
-### AVEVA CONNECT Data Services API
+The data models the API reads and writes.
 
-AVEVA CONNECT (formerly AVEVA Data Hub / OSIsoft Cloud Services) provides cloud-native REST APIs for industrial time-series data management, data views, event data, and secure cloud-based data sharing across operational technology environments.
+- [OSIsoft PI Point](https://apis.io/schemas/osisoft-pi/osisoft-pi-point/)
+- [OSIsoft PI Timed Value](https://apis.io/schemas/osisoft-pi/osisoft-pi-timed-value/)
 
-- **Human URL:** [https://docs.aveva.com/bundle/aveva-data-hub-api-reference](https://docs.aveva.com/bundle/aveva-data-hub-api-reference)
-- **Base URL:** `https://api.aveva.com`
+#### JSON-LD (1)
 
-#### Tags
+Linked-data contexts for the provider's vocabulary.
 
-- Cloud
-- IoT
-- Manufacturing
-- REST
-- Time Series
+- [Osisoft Pi Context](https://apis.io/jsonld/osisoft-pi/osisoft-pi-context/)
 
-#### Properties
+#### Collections (9)
 
-- [Documentation](https://docs.aveva.com/bundle/aveva-data-hub-api-reference)
-- [Postman Collection](collections/osisoft-pi-web-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/osisoft-pi-web-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Postman and Open Collection request collections.
 
-### OSIsoft PI AF SDK
+- [OSIsoft PI Web AssetServers API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-assetservers-api/)
+- [OSIsoft PI Web AssetServers Attributes API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-attributes-api/)
+- [OSIsoft PI Web AssetServers BatchRequests API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-batchrequests-api/)
+- [OSIsoft PI Web AssetServers DataServers API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-dataservers-api/)
+- [OSIsoft PI Web AssetServers Elements API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-elements-api/)
+- [OSIsoft PI Web AssetServers EventFrames API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-eventframes-api/)
+- [OSIsoft PI Web AssetServers PIPoints API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-pipoints-api/)
+- [OSIsoft PI Web AssetServers Streams API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-streams-api/)
+- [OSIsoft PI Web API](https://apis.io/collections/osisoft-pi/open-osisoft-pi-web-api/)
 
-OSIsoft PI Asset Framework SDK (AF SDK) is a .NET client library for programmatic access to the PI System asset hierarchy, time-series data, and event frames from on-premises PI servers.
+#### Governance rules (1)
 
-- **Human URL:** [https://docs.aveva.com/](https://docs.aveva.com/)
-- **Base URL:** `https://piwebapi.example.com/piwebapi`
+Spectral rulesets for the provider's contracts.
 
-#### Tags
+- [OSIsoft PI System — jsonschema rules](https://apis.io/rules/osisoft-pi/osisoft-pi-jsonschema-spectral-rules/)
 
-- .NET
-- Asset Framework
-- Manufacturing
-- SDK
+#### Security (4)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://docs.aveva.com/)
-- [S D Ks](https://github.com/aveva/sample-afsdk-getting_started-dotnet)
-- [Postman Collection](collections/osisoft-pi-web-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/osisoft-pi-web-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Osisoft Pi Authentication](https://apis.io/security/osisoft-pi/osisoft-pi-authentication/)
+- [Osisoft Pi Domain Security](https://apis.io/security/osisoft-pi/osisoft-pi-domain-security/)
+- [Osisoft Pi Trust Center](https://apis.io/security/osisoft-pi/osisoft-pi-trust-center/)
+- [Osisoft Pi Vulnerability Disclosure](https://apis.io/security/osisoft-pi/osisoft-pi-vulnerability-disclosure/)
 
-## Common Properties
+#### Plans and pricing (1)
 
-- [LinkedIn](https://www.linkedin.com/company/osisoft)
-- [Portal](https://docs.aveva.com/)
-- [Documentation](https://docs.aveva.com/)
-- [Getting Started](https://docs.aveva.com/bundle/pi-web-api-getting-started)
+Published plans, tiers and prices.
+
+- [Osisoft Pi Plans Pricing](https://apis.io/plans/osisoft-pi/osisoft-pi-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Osisoft Pi Rate Limits](https://apis.io/rate-limits/osisoft-pi/osisoft-pi-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Osisoft Pi Finops](https://apis.io/finops/osisoft-pi/osisoft-pi-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.aveva.com/)
+- [Documentation](https://docs.aveva.com/)
+- [Getting started](https://docs.aveva.com/bundle/pi-web-api-getting-started)
 - [Support](https://softwaresupport.aveva.com/)
-- [Support](https://community.aveva.com/)
-- [Documentation](https://learningacademy.aveva.com/)
-- [GitHub Organization](https://github.com/aveva)
-- [S D Ks](https://github.com/aveva)
-- [OpenAPI](openapi/osisoft-pi-web-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [JSON Schema](json-schema/osisoft-pi-point-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/osisoft-pi-timed-value-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [J S O N L D Context](json-ld/osisoft-pi-context.jsonld)
+- [Blog](https://www.aveva.com/en/solutions/engineering/)
+- [GitHub](https://github.com/aveva)
 
-## Maintainers
+## API Evangelist rating
 
-**Email:** kin@apievangelist.com
+**Kin Score 39.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 48.2 |
+| Contract quality | 52.3 |
+| Contract governance | 9.8 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 73.8 |
+| Access clarity | 13.2 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 27.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/osisoft-pi/](https://apis.io/providers/osisoft-pi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for OSIsoft PI System: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/osisoft-pi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
